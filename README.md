@@ -97,10 +97,13 @@
 **А. Автоматически через GitHub Actions (рекомендуется).** После этого любой
 push в основную ветку выкладывает хаб сам.
 
-1. В Cloudflare: *My Profile → API Tokens → Create Token* → шаблон
-   «Edit Cloudflare Workers» или свой токен с правом
-   **Account → Cloudflare Pages → Edit**. Скопировать токен и Account ID
-   (он на главной странице аккаунта справа).
+1. В Cloudflare создать отдельный токен для этого репозитория: *My Profile →
+   API Tokens → Create Token → Create Custom Token*, право
+   **Account → Cloudflare Pages → Edit**, в *Account Resources* — свой
+   аккаунт. Значение токена Cloudflare показывает один раз, его нужно сразу
+   скопировать. Account ID — *Workers & Pages* → правая колонка
+   *Account details* (он же — 32 символа в адресе дашборда после
+   `dash.cloudflare.com/`; или `npx wrangler whoami` на ноутбуке).
 2. В GitHub-репозитории: *Settings → Secrets and variables → Actions → New
    repository secret*:
    - `CLOUDFLARE_API_TOKEN` — токен;
