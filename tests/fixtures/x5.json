@@ -1,0 +1,529 @@
+{
+ "schema": "x5-v1",
+ "meta": {
+  "generated_at": "2026-10-01T21:32:26Z",
+  "valuation_date": "2026-10-01",
+  "facts_date": "2026-06-30",
+  "book_version": "1.1.3",
+  "book_date": "2026-09-30",
+  "basis": "до МСФО 16",
+  "shares_mln": 245.98118,
+  "governance_discount": 0.02,
+  "anchor_period": "2026H1",
+  "first_period": "2026H2",
+  "last_period": "2036H2",
+  "open_period": "2026H2",
+  "curve_as_of": "2026-09-18",
+  "closed_periods": 0,
+  "elapsed": 0.5,
+  "fast": false,
+  "payload_sha256": "5894a329c7805e10e497048078407bfb1a6f121bf87a8f6d575449e14de7a661",
+  "bytes": 143020,
+  "previous_sha256": "b02fb08c56d6669d7a491bef0e5dc0231621c469dba7b25f732c924161f04858"
+ },
+ "market": {
+  "price": 1926,
+  "price_date": "2026-10-01",
+  "price_time": "23:49:52",
+  "price_source": "Мосбиржа, режим TQBR",
+  "price_status": "live",
+  "book_price": 1808.5,
+  "market_cap": 473.759753,
+  "claims": 421.39118,
+  "market_ev": 910.18261,
+  "equity_share_of_ev": 0.537025674,
+  "ebitda_rep_ltm": 287.021,
+  "adj_ebitda_ltm": 296.74,
+  "ev_ebitda_ltm": 2.94289182,
+  "pe_ltm": 7.12752941,
+  "dividend_yield_ltm": 0.31827622,
+  "brokers": {
+   "rows": [
+    {
+     "broker": "Финам",
+     "date": "2026-09-24",
+     "target": 2510,
+     "rating": "покупать",
+     "horizon": "12 мес.",
+     "src": "analyst-finmarket-6713775.html",
+     "after_report": true,
+     "in_median": true
+    },
+    {
+     "broker": "Эйлер",
+     "date": "2026-09-11",
+     "target": 2600,
+     "rating": "покупать",
+     "horizon": "12 мес.",
+     "src": "analyst-finmarket-6704753.html",
+     "after_report": true,
+     "in_median": true
+    },
+    {
+     "broker": "БКС Мир инвестиций",
+     "date": "2026-08-14",
+     "target": 2500,
+     "rating": "позитивно",
+     "horizon": "12 мес.",
+     "src": "analyst-finmarket-6685670.html",
+     "after_report": true,
+     "in_median": true
+    },
+    {
+     "broker": "ПСБ",
+     "date": "2026-08-14",
+     "target": 3800,
+     "rating": "потенциал роста",
+     "horizon": "долгосрочный",
+     "src": "analyst-finmarket-6685730.html",
+     "after_report": true,
+     "in_median": false
+    },
+    {
+     "broker": "Т-Инвестиции",
+     "date": "2026-08-13",
+     "target": 2250,
+     "rating": "держать",
+     "horizon": "12 мес.",
+     "src": "analyst-finmarket-6685040.html",
+     "after_report": true,
+     "in_median": true
+    },
+    {
+     "broker": "Цифра брокер",
+     "date": "2026-08-13",
+     "target": 3943,
+     "rating": "покупать",
+     "horizon": null,
+     "src": "analyst-finmarket-6685096.html",
+     "after_report": true,
+     "in_median": false
+    },
+    {
+     "broker": "Синара",
+     "date": "2026-08-13",
+     "target": null,
+     "rating": "позитивно",
+     "horizon": null,
+     "src": "analyst-finmarket-6684897.html",
+     "after_report": true,
+     "in_median": false
+    },
+    {
+     "broker": "Газпромбанк",
+     "date": "2026-08-13",
+     "target": null,
+     "rating": "позитивно на долгий срок",
+     "horizon": null,
+     "src": "analyst-finmarket-6685216.html",
+     "after_report": true,
+     "in_median": false
+    },
+    {
+     "broker": "Freedom Finance Global",
+     "date": "2026-05-19",
+     "target": 3000,
+     "rating": "держать",
+     "horizon": null,
+     "src": "analyst-finmarket-6623908.html",
+     "after_report": false,
+     "in_median": false
+    },
+    {
+     "broker": "ВЕЛЕС Капитал",
+     "date": "2026-04-30",
+     "target": 3603,
+     "rating": "покупать",
+     "horizon": null,
+     "src": "analyst-finmarket-6611603.html",
+     "after_report": false,
+     "in_median": false
+    },
+    {
+     "broker": "ВТБ Мои инвестиции",
+     "date": "2026-04-30",
+     "target": 3485,
+     "rating": "позитивно",
+     "horizon": "12 мес.",
+     "src": "analyst-finmarket-6611561.html",
+     "after_report": false,
+     "in_median": false
+    }
+   ],
+   "median": 2505,
+   "median_n": 4,
+   "median_basis": "медиана 12-месячных целей после отчёта за 2 кв. 2026 (13.08–24.09.2026): 2250 / 2500 / 2510 / 2600",
+   "after_report": "МСФО 2 кв. 2026 (13.08.2026)",
+   "report_date": "2026-08-13",
+   "as_of": "2026-09-28"
+  },
+  "ex_dividend": [
+   {
+    "date": "2026-01-06",
+    "dps": 368
+   },
+   {
+    "date": "2026-07-07",
+    "dps": 245
+   }
+  ],
+  "price_min": {
+   "date": "2026-08-28",
+   "close": 1757
+  },
+  "price_max": {
+   "date": "2026-01-05",
+   "close": 3026.5
+  }
+ },
+ "fair_value": {
+  "low": 3292.55,
+  "central": 3242.28,
+  "high": 3192.01,
+  "printed": {
+   "low": 3300,
+   "central": 3250,
+   "high": 3200
+  },
+  "rates_view": {
+   "rub": -100.542028
+  }
+ },
+ "headline": {
+  "central": 3148.43,
+  "printed_central": 3150,
+  "band": [
+   2400.47,
+   3911.14
+  ],
+  "printed_band": [
+   2400,
+   3900
+  ],
+  "inner": [
+   2739.4,
+   3571.76
+  ],
+  "printed_inner": [
+   2750,
+   3550
+  ],
+  "mean": 3159.47,
+  "p_central_below_market": 0.015,
+  "market_price": 1926,
+  "print_step": 50,
+  "draws": 2000,
+  "lambda": 0.5
+ },
+ "worlds": {
+  "N": {
+   "name": "Нормализация"
+  },
+  "H": {
+   "name": "Высокие ставки надолго"
+  },
+  "M": {
+   "name": "Рыночный как есть"
+  },
+  "source": {}
+ },
+ "dividends": {
+  "next_expected": {
+   "label": "за 9 мес. 2026 г.",
+   "record_date_est": "2027-01-06",
+   "record_date_note": "≈ начало января 2027 (прецедент: 06.01.2026)",
+   "pay_period": "2027H1",
+   "dps_model": 215.712568,
+   "note": "не объявлен на 28.09.2026; ≈ середина ноября 2026 (прецедент: 13.11.2025)"
+  },
+  "yield_ltm": 0.31827622
+ },
+ "calendar": {
+  "events": [
+   {
+    "date": "2026-10-16",
+    "title": "Операционные результаты X5 за 3 кв. 2026 г.",
+    "kind": "trading_update",
+    "confirmed": true,
+    "note": null
+   },
+   {
+    "date": "2026-10-23",
+    "title": "Заседание Совета директоров Банка России по ключевой ставке",
+    "kind": "cbr",
+    "confirmed": true,
+    "note": "среднесрочный прогноз"
+   },
+   {
+    "date": "2026-10-29",
+    "title": "Финансовые результаты X5 за 3 кв. 2026 г. (МСФО)",
+    "kind": "ifrs",
+    "confirmed": true,
+    "note": null,
+    "covers": null
+   },
+   {
+    "date": "2026-11-13",
+    "title": "Рекомендация Наблюдательного совета по дивидендам за 9 мес. 2026 г.",
+    "kind": "dividend",
+    "confirmed": false,
+    "note": "оценка по прецеденту: 13.11.2025 (≈ середина ноября)"
+   },
+   {
+    "date": "2026-12-18",
+    "title": "Заседание Совета директоров Банка России по ключевой ставке",
+    "kind": "cbr",
+    "confirmed": true,
+    "note": null
+   },
+   {
+    "date": "2026-12-18",
+    "title": "ВОСА о дивидендах за 9 мес. 2026 г.",
+    "kind": "dividend",
+    "confirmed": false,
+    "note": "оценка по прецеденту: ВОСА 18.12.2025"
+   },
+   {
+    "date": "2027-01-06",
+    "title": "Дата закрытия реестра (отсечка) по дивидендам за 9 мес. 2026 г.",
+    "kind": "dividend",
+    "confirmed": false,
+    "note": "оценка по прецеденту: реестр 06.01.2026 (≈ начало января 2027)"
+   },
+   {
+    "date": "2027-01-28",
+    "title": "Операционные результаты X5 за 4 кв. и 2026 г.",
+    "kind": "trading_update",
+    "confirmed": false,
+    "note": "оценка по прецеденту: 24.01.2024, 27.01.2025, 28.01.2026 (≈ конец января)"
+   },
+   {
+    "date": "2027-02-12",
+    "title": "Заседание Совета директоров Банка России по ключевой ставке",
+    "kind": "cbr",
+    "confirmed": false,
+    "note": "оценка: календарь ЦБ на 2027 г. не опубликован на 28.09.2026; прецедент 16.02.2024, 14.02.2025, 13.02.2026"
+   },
+   {
+    "date": "2027-03-19",
+    "title": "Заседание Совета директоров Банка России по ключевой ставке",
+    "kind": "cbr",
+    "confirmed": false,
+    "note": "оценка: прецедент 22.03.2024, 21.03.2025, 20.03.2026"
+   },
+   {
+    "date": "2027-03-19",
+    "title": "Финансовые результаты X5 за 2026 г. (МСФО) и ориентиры на 2027 г.",
+    "kind": "ifrs",
+    "confirmed": false,
+    "note": "оценка по прецеденту: пятница около 20 марта — 22.03.2024, 21.03.2025, 20.03.2026 (≈ 19.03.2027)",
+    "covers": "2026H2"
+   },
+   {
+    "date": "2027-04-16",
+    "title": "Операционные результаты X5 за 1 кв. 2027 г.",
+    "kind": "trading_update",
+    "confirmed": false,
+    "note": "оценка по прецеденту: 16.04.2024, 16.04.2025, 16.04.2026"
+   },
+   {
+    "date": "2027-04-23",
+    "title": "Заседание Совета директоров Банка России по ключевой ставке",
+    "kind": "cbr",
+    "confirmed": false,
+    "note": "оценка: прецедент 26.04.2024, 25.04.2025, 24.04.2026"
+   },
+   {
+    "date": "2027-04-29",
+    "title": "Финансовые результаты X5 за 1 кв. 2027 г. (МСФО)",
+    "kind": "ifrs",
+    "confirmed": false,
+    "note": "оценка по прецеденту: 22.04.2024, 05.05.2025, 29.04.2026",
+    "covers": null
+   },
+   {
+    "date": "2027-05-19",
+    "title": "Рекомендация Наблюдательного совета по дивидендам за 2026 г.",
+    "kind": "dividend",
+    "confirmed": false,
+    "note": "оценка по прецеденту: 19.05.2026"
+   },
+   {
+    "date": "2027-06-11",
+    "title": "Заседание Совета директоров Банка России по ключевой ставке",
+    "kind": "cbr",
+    "confirmed": false,
+    "note": "оценка: прецедент 07.06.2024, 06.06.2025, 19.06.2026"
+   },
+   {
+    "date": "2027-06-25",
+    "title": "Годовое общее собрание акционеров X5 (дивиденды за 2026 г.)",
+    "kind": "dividend",
+    "confirmed": false,
+    "note": "оценка по прецеденту: ГОСА 27.06.2025, 26.06.2026 (≈ конец июня)"
+   },
+   {
+    "date": "2027-07-07",
+    "title": "Дата закрытия реестра по финальным дивидендам за 2026 г.",
+    "kind": "dividend",
+    "confirmed": false,
+    "note": "оценка по прецеденту: 09.07.2025, 07.07.2026"
+   },
+   {
+    "date": "2027-07-16",
+    "title": "Операционные результаты X5 за 2 кв. 2027 г.",
+    "kind": "trading_update",
+    "confirmed": false,
+    "note": "оценка по прецеденту: 16.07.2024, 16.07.2025, 16.07.2026"
+   },
+   {
+    "date": "2027-07-23",
+    "title": "Заседание Совета директоров Банка России по ключевой ставке",
+    "kind": "cbr",
+    "confirmed": false,
+    "note": "оценка: прецедент 26.07.2024, 25.07.2025, 24.07.2026"
+   },
+   {
+    "date": "2027-08-13",
+    "title": "Финансовые результаты X5 за 2 кв. и 1П 2027 г. (МСФО)",
+    "kind": "ifrs",
+    "confirmed": false,
+    "note": "оценка по прецеденту: 15.08.2024, 13.08.2025, 13.08.2026",
+    "covers": "2027H1"
+   },
+   {
+    "date": "2027-09-10",
+    "title": "Заседание Совета директоров Банка России по ключевой ставке",
+    "kind": "cbr",
+    "confirmed": false,
+    "note": "оценка: прецедент 13.09.2024, 12.09.2025, 11.09.2026"
+   }
+  ]
+ },
+ "checks": {
+  "flags": [
+   {
+    "name": "book_update",
+    "title": "книгу пора обновить",
+    "raised": false,
+    "detail": "кривая и возраст книги в пределах"
+   },
+   {
+    "name": "dividend_register",
+    "title": "ожидаемая отсечка прошла, дивиденда в реестре нет",
+    "raised": false,
+    "detail": "реестр полон"
+   },
+   {
+    "name": "report_fact",
+    "title": "вышел отчёт за полугодие, факт не внесён",
+    "raised": false,
+    "detail": "отчёт за 2П 2026 по календарю — 2027-03-19"
+   },
+   {
+    "name": "price_fallback",
+    "title": "цена — последняя принятая",
+    "raised": false,
+    "detail": "цена рынка: живая цена"
+   }
+  ]
+ },
+ "live": {
+  "degraded": false,
+  "errors": {}
+ },
+ "next_report": {
+  "period": "2026H2",
+  "closing": {
+   "date": "2027-03-19",
+   "title": "Финансовые результаты X5 за 2026 г. (МСФО) и ориентиры на 2027 г.",
+   "confirmed": false,
+   "published": false
+  },
+  "events": [
+   {
+    "date": "2026-10-16",
+    "title": "Операционные результаты X5 за 3 кв. 2026 г.",
+    "kind": "trading_update",
+    "confirmed": true,
+    "note": null
+   },
+   {
+    "date": "2026-10-23",
+    "title": "Заседание Совета директоров Банка России по ключевой ставке",
+    "kind": "cbr",
+    "confirmed": true,
+    "note": "среднесрочный прогноз"
+   },
+   {
+    "date": "2026-10-29",
+    "title": "Финансовые результаты X5 за 3 кв. 2026 г. (МСФО)",
+    "kind": "ifrs",
+    "confirmed": true,
+    "note": null,
+    "covers": null
+   },
+   {
+    "date": "2026-11-13",
+    "title": "Рекомендация Наблюдательного совета по дивидендам за 9 мес. 2026 г.",
+    "kind": "dividend",
+    "confirmed": false,
+    "note": "оценка по прецеденту: 13.11.2025 (≈ середина ноября)"
+   },
+   {
+    "date": "2026-12-18",
+    "title": "Заседание Совета директоров Банка России по ключевой ставке",
+    "kind": "cbr",
+    "confirmed": true,
+    "note": null
+   },
+   {
+    "date": "2026-12-18",
+    "title": "ВОСА о дивидендах за 9 мес. 2026 г.",
+    "kind": "dividend",
+    "confirmed": false,
+    "note": "оценка по прецеденту: ВОСА 18.12.2025"
+   },
+   {
+    "date": "2027-01-06",
+    "title": "Дата закрытия реестра (отсечка) по дивидендам за 9 мес. 2026 г.",
+    "kind": "dividend",
+    "confirmed": false,
+    "note": "оценка по прецеденту: реестр 06.01.2026 (≈ начало января 2027)"
+   },
+   {
+    "date": "2027-01-28",
+    "title": "Операционные результаты X5 за 4 кв. и 2026 г.",
+    "kind": "trading_update",
+    "confirmed": false,
+    "note": "оценка по прецеденту: 24.01.2024, 27.01.2025, 28.01.2026 (≈ конец января)"
+   },
+   {
+    "date": "2027-02-12",
+    "title": "Заседание Совета директоров Банка России по ключевой ставке",
+    "kind": "cbr",
+    "confirmed": false,
+    "note": "оценка: календарь ЦБ на 2027 г. не опубликован на 28.09.2026; прецедент 16.02.2024, 14.02.2025, 13.02.2026"
+   },
+   {
+    "date": "2027-03-19",
+    "title": "Заседание Совета директоров Банка России по ключевой ставке",
+    "kind": "cbr",
+    "confirmed": false,
+    "note": "оценка: прецедент 22.03.2024, 21.03.2025, 20.03.2026"
+   },
+   {
+    "date": "2027-03-19",
+    "title": "Финансовые результаты X5 за 2026 г. (МСФО) и ориентиры на 2027 г.",
+    "kind": "ifrs",
+    "confirmed": false,
+    "note": "оценка по прецеденту: пятница около 20 марта — 22.03.2024, 21.03.2025, 20.03.2026 (≈ 19.03.2027)",
+    "covers": "2026H2"
+   }
+  ]
+ },
+ "book": {
+  "version": "1.1.3",
+  "date": "2026-09-30"
+ }
+}

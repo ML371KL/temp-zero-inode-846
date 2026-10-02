@@ -1,0 +1,756 @@
+{
+ "schema": "sber-v1",
+ "meta": {
+  "generated_at": "2026-10-01T22:20:15+00:00",
+  "valuation_date": "2026-10-01",
+  "facts_date": "2026-06-30",
+  "book_version": "1.3",
+  "book_date": "2026-09-30",
+  "book_tag": "book-1.3",
+  "fast": false,
+  "payload_sha256": "f840111380ebb6ff0f24fc0db18afc477a2ef71c26da6fc202047207ec3288f0",
+  "previous_sha256": "357d61f8ec5e048cd1fa168ad94c44d56a8cd793e5a0c3a0fc71c28ea3215600",
+  "bytes": 299180,
+  "company": {
+   "name": "Сбербанк",
+   "tickers": [
+    "SBER",
+    "SBERP"
+   ],
+   "main_ticker": "SBER",
+   "share_classes": [
+    {
+     "ticker": "SBER",
+     "class": "ordinary"
+    },
+    {
+     "ticker": "SBERP",
+     "class": "preferred"
+    }
+   ],
+   "cbr_regnum": 1481,
+   "fiscal_year_end": "12-31"
+  },
+  "shares": {
+   "issued_mln": 22586.948,
+   "outstanding_mln": 22342.548,
+   "by_ticker": {
+    "SBER": {
+     "issued_mln": 21586.948,
+     "treasury_mln": 209.9,
+     "outstanding_mln": 21377.048
+    },
+    "SBERP": {
+     "issued_mln": 1000,
+     "treasury_mln": 34.5,
+     "outstanding_mln": 965.5
+    }
+   },
+   "as_of": "2026-06-30",
+   "src": "отчётность МСФО и данные Московской биржи (факты книги)"
+  },
+  "period_unit": "quarter",
+  "input_unit": "month",
+  "anchor_period": "2026Q2",
+  "first_period": "2026Q3",
+  "last_period": "2036Q4",
+  "horizon": [
+   "2026Q3",
+   "2036Q4"
+  ],
+  "open_period": "2026Q4",
+  "periods_closed": 1,
+  "elapsed": 0,
+  "book_first_period_closed": true,
+  "curve_as_of": "2026-09-18",
+  "basis": "ifrs",
+  "step": "quarter",
+  "day_count": "act365",
+  "governance_discount": 0.004,
+  "published_at": "2026-10-01T22:20:42+00:00"
+ },
+ "market": {
+  "price": 276.29,
+  "price_date": "2026-10-01",
+  "prices": {
+   "SBER": {
+    "price": 276.29,
+    "date": "2026-10-01",
+    "time": "23:45",
+    "source": "T-Invest",
+    "status": "live",
+    "book_price": 272.87
+   },
+   "SBERP": {
+    "price": 277.06,
+    "date": "2026-10-01",
+    "time": "23:45",
+    "source": "T-Invest",
+    "status": "live",
+    "book_price": 273.77
+   }
+  },
+  "cap": 6173.77,
+  "cap_by_ticker": {
+   "SBER": 5906.26,
+   "SBERP": 267.5
+  },
+  "multiples": {
+   "pb": 0.6973,
+   "pb_reported": 0.7361,
+   "pe_ltm": 3.3034,
+   "pe_fwd": 3.1686,
+   "dividend_yield_ltm": {
+    "SBER": 0.136234,
+    "SBERP": 0.135855
+   },
+   "dividend_yield_fwd": {
+    "SBER": 0.155525,
+    "SBERP": 0.155093
+   },
+   "bv_per_share": 396.27,
+   "basis": "ifrs"
+  },
+  "price_min": {
+   "SBER": {
+    "date": "2026-07-20",
+    "close": 257.26
+   },
+   "SBERP": {
+    "date": "2026-07-20",
+    "close": 260.44
+   }
+  },
+  "price_max": {
+   "SBER": {
+    "date": "2026-04-23",
+    "close": 327.51
+   },
+   "SBERP": {
+    "date": "2026-04-23",
+    "close": 327.5
+   }
+  },
+  "ex_dividend": [
+   {
+    "date": "2026-07-20",
+    "dps": 37.64,
+    "year": 2025
+   }
+  ],
+  "brokers": {
+   "as_of": "2026-10-01",
+   "source": "T-Invest",
+   "n": 13,
+   "median": 384,
+   "min": 320,
+   "max": 430,
+   "recommendations": {
+    "buy": 12,
+    "hold": 1,
+    "sell": 0
+   },
+   "history": [
+    {
+     "date": "2026-10-01",
+     "median": 384,
+     "n": 13
+    }
+   ]
+  }
+ },
+ "fair_value": {
+  "method": "judgement_median",
+  "low": 290.93,
+  "central": 379.4,
+  "high": 467.87,
+  "printed_low": 290,
+  "printed_central": 380,
+  "printed_high": 470,
+  "rates_view": {
+   "low": 290.93,
+   "high": 467.87,
+   "rub": 176.94
+  },
+  "by_world": {
+   "N": {
+    "price": 557.45,
+    "v0": 12504.9,
+    "bv_v": 8858.51,
+    "pb": 1.4116
+   },
+   "H": {
+    "price": 476.84,
+    "v0": 10696.72,
+    "bv_v": 8837.46,
+    "pb": 1.2104
+   },
+   "M": {
+    "price": 290.93,
+    "v0": 6526.31,
+    "bv_v": 8858.34,
+    "pb": 0.7367
+   }
+  },
+  "headline": {
+   "median": 348.6,
+   "printed_median": 350,
+   "band80": [
+    251.37,
+    456.45
+   ],
+   "printed_band80": [
+    250,
+    455
+   ],
+   "band50": [
+    293.5,
+    406.39
+   ],
+   "printed_band50": [
+    295,
+    405
+   ],
+   "mean": 351.09,
+   "point": 379.4,
+   "printed_point": 380,
+   "market": 276.29,
+   "market_by_ticker": {
+    "SBER": 276.29,
+    "SBERP": 277.06
+   },
+   "p_below_market": 0.186,
+   "p_below_by_ticker": {
+    "SBER": 0.186,
+    "SBERP": 0.189
+   },
+   "market_percentile": 0.186,
+   "upside": {
+    "SBER": 0.261718,
+    "SBERP": 0.258211
+   },
+   "draws": 2000,
+   "seed": 20260930,
+   "own_macro_confidence": 0.5,
+   "lambda_step": 0.05,
+   "print_step": 5,
+   "ceiling_x_market": 3
+  }
+ },
+ "worlds": {
+  "order": [
+   "N",
+   "H",
+   "M"
+  ],
+  "rows": {},
+  "source": {},
+  "overlay": {}
+ },
+ "dividends": {
+  "next_expected": {
+   "year": 2026,
+   "status": "model",
+   "dps": 42.97,
+   "dps_policy": 42.97,
+   "dps_mean": 36.621,
+   "dps_p10": 0,
+   "dps_p90": 44.2665,
+   "p_cancel": 0.15,
+   "record_date": null,
+   "record_date_est": "2027-07-19",
+   "record_date_note": "оценка по календарю событий (окно)",
+   "pay_date_est": "2027-08-02",
+   "yield": {
+    "SBER": 0.155525,
+    "SBERP": 0.155093
+   },
+   "condition": {
+    "metric": "n20_0",
+    "threshold": 0.133,
+    "n20_expected": 0.147413,
+    "p_limited": 0
+   }
+  },
+  "yield_ltm": {
+   "SBER": 0.136234,
+   "SBERP": 0.135855
+  }
+ },
+ "calendar": {
+  "today": "2026-10-01",
+  "next_fact": {
+   "id": "ifrs-2026Q3",
+   "date": "2026-10-28",
+   "title": "МСФО группы за 3К и 9М 2026 г.",
+   "kind": "ifrs",
+   "covers": "2026Q3",
+   "confirmed": true,
+   "precision": "day",
+   "days": 27
+  },
+  "next_ras": {
+   "month": "2026M09",
+   "release_date": "2026-10-09",
+   "release_confirmed": true,
+   "form102_date_est": "2026-10-24",
+   "form102_latest_est": "2026-10-26",
+   "enters_via": "release",
+   "date": "2026-10-09",
+   "days": 8
+  },
+  "events": [
+   {
+    "id": "ras-2026M09",
+    "date": "2026-10-09",
+    "kind": "ras",
+    "title": "РСБУ банка за сентябрь 2026 г. (релиз; 9 мес. нарастающим)",
+    "confirmed": true,
+    "precision": "day",
+    "days": 8,
+    "covers": "2026M09",
+    "note": "дата из календаря эмитента в T-Invest (отчёт за 3-й квартал 2026 г.; около 10-го числа месяца выходит релиз РСБУ); прецедент: 10.10.2023, 09.10.2024, 09.10.2025"
+   },
+   {
+    "id": "cbr-2026-10-23",
+    "date": "2026-10-23",
+    "kind": "cbr_forecast",
+    "title": "Заседание Совета директоров Банка России по ключевой ставке (опорное: среднесрочный прогноз)",
+    "confirmed": true,
+    "precision": "day",
+    "days": 22,
+    "note": "решение в 13:30 МСК; публикация среднесрочного прогноза — вход миров (новая версия книги)"
+   },
+   {
+    "id": "form102-2026M09",
+    "date": "2026-10-24",
+    "kind": "form102",
+    "title": "Форма 0409102 за сентябрь 2026",
+    "confirmed": false,
+    "precision": "window",
+    "days": 23,
+    "covers": "2026M09",
+    "earliest": "2026-10-24",
+    "latest": "2026-10-26"
+   },
+   {
+    "id": "ifrs-2026Q3",
+    "date": "2026-10-28",
+    "kind": "ifrs",
+    "title": "МСФО группы за 3К и 9М 2026 г.",
+    "confirmed": true,
+    "precision": "day",
+    "days": 27,
+    "covers": "2026Q3",
+    "note": "дата из календаря эмитента в T-Invest (отчёт за 3-й квартал 2026 г.; в конце месяца выходит МСФО); прецедент: 28.10.2025"
+   },
+   {
+    "id": "ras-2026M10",
+    "date": "2026-11-11",
+    "kind": "ras",
+    "title": "РСБУ банка за октябрь 2026 г. (релиз; 10 мес. нарастающим)",
+    "confirmed": false,
+    "precision": "window",
+    "days": 41,
+    "covers": "2026M10",
+    "earliest": "2026-11-10",
+    "latest": "2026-11-13",
+    "note": "оценка по прецеденту: 10.11.2023, 11.11.2024, 12.11.2025"
+   },
+   {
+    "id": "investor-day-2026",
+    "date": "2026-11-25",
+    "kind": "investor_day",
+    "title": "День инвестора: стратегия 2027–2029 и новая дивидендная политика",
+    "confirmed": false,
+    "precision": "window",
+    "days": 55,
+    "earliest": "2026-11-01",
+    "latest": "2026-11-30",
+    "note": "объявлен месяц — ноябрь 2026 г. (финансовый директор на звонке 29.04.2026), день на 01.10.2026 не объявлен; прецеденты Дня инвестора: 06.12.2023, 10.12.2025; дата — оценка; новая дивидендная политика войдёт новым фактом и новой версией книги"
+   },
+   {
+    "id": "ras-2026M11",
+    "date": "2026-12-09",
+    "kind": "ras",
+    "title": "РСБУ банка за ноябрь 2026 г. (релиз; 11 мес. нарастающим)",
+    "confirmed": false,
+    "precision": "window",
+    "days": 69,
+    "covers": "2026M11",
+    "earliest": "2026-12-08",
+    "latest": "2026-12-11",
+    "note": "оценка по прецеденту: 11.12.2023, 10.12.2024, 09.12.2025"
+   },
+   {
+    "id": "cbr-2026-12-18",
+    "date": "2026-12-18",
+    "kind": "cbr_rate",
+    "title": "Заседание Совета директоров Банка России по ключевой ставке",
+    "confirmed": true,
+    "precision": "day",
+    "days": 78,
+    "note": "решение в 13:30 МСК"
+   },
+   {
+    "id": "ras-2026M12",
+    "date": "2027-01-19",
+    "kind": "ras",
+    "title": "РСБУ банка за декабрь 2026 г. (релиз; 12 мес. нарастающим)",
+    "confirmed": false,
+    "precision": "window",
+    "days": 110,
+    "covers": "2026M12",
+    "earliest": "2027-01-15",
+    "latest": "2027-01-21",
+    "note": "оценка по прецеденту: 17.01.2024, 17.01.2025, 20.01.2026 (декабрь — после праздников)"
+   },
+   {
+    "id": "ras-2027M01",
+    "date": "2027-02-10",
+    "kind": "ras",
+    "title": "РСБУ банка за январь 2027 г. (релиз; 1 мес. нарастающим)",
+    "confirmed": false,
+    "precision": "window",
+    "days": 132,
+    "covers": "2027M01",
+    "earliest": "2027-02-09",
+    "latest": "2027-02-12",
+    "note": "оценка по прецеденту: 09.02.2024, 11.02.2025, 10.02.2026"
+   },
+   {
+    "id": "cbr-2027-02-12",
+    "date": "2027-02-12",
+    "kind": "cbr_forecast",
+    "title": "Заседание Совета директоров Банка России по ключевой ставке (опорное: среднесрочный прогноз)",
+    "confirmed": true,
+    "precision": "day",
+    "days": 134,
+    "note": "решение в 13:30 МСК; публикация среднесрочного прогноза — вход миров (новая версия книги)"
+   },
+   {
+    "id": "ifrs-2026Q4",
+    "date": "2027-02-25",
+    "kind": "ifrs",
+    "title": "МСФО группы за 2026 г.",
+    "confirmed": false,
+    "precision": "window",
+    "days": 147,
+    "covers": "2026Q4",
+    "earliest": "2027-02-24",
+    "latest": "2027-02-27",
+    "note": "оценка по прецеденту: 27.02.2025 (за 2024), 26.02.2026 (за 2025)"
+   },
+   {
+    "id": "ras-2027M02",
+    "date": "2027-03-11",
+    "kind": "ras",
+    "title": "РСБУ банка за февраль 2027 г. (релиз; 2 мес. нарастающим)",
+    "confirmed": false,
+    "precision": "window",
+    "days": 161,
+    "covers": "2027M02",
+    "earliest": "2027-03-09",
+    "latest": "2027-03-12",
+    "note": "оценка по прецеденту: 12.03.2024, 11.03.2025, 11.03.2026"
+   },
+   {
+    "id": "cbr-2027-03-19",
+    "date": "2027-03-19",
+    "kind": "cbr_rate",
+    "title": "Заседание Совета директоров Банка России по ключевой ставке",
+    "confirmed": true,
+    "precision": "day",
+    "days": 169,
+    "note": "решение в 13:30 МСК"
+   },
+   {
+    "id": "ras-2027M03",
+    "date": "2027-04-09",
+    "kind": "ras",
+    "title": "РСБУ банка за март 2027 г. (релиз; 3 мес. нарастающим)",
+    "confirmed": false,
+    "precision": "window",
+    "days": 190,
+    "covers": "2027M03",
+    "earliest": "2027-04-08",
+    "latest": "2027-04-13",
+    "note": "оценка по прецеденту: 09.04.2024, 09.04.2025, 09.04.2026"
+   },
+   {
+    "id": "ifrs-2027Q1",
+    "date": "2027-04-28",
+    "kind": "ifrs",
+    "title": "МСФО группы за 1К 2027 г.",
+    "confirmed": false,
+    "precision": "window",
+    "days": 209,
+    "covers": "2027Q1",
+    "earliest": "2027-04-27",
+    "latest": "2027-04-30",
+    "note": "оценка по прецеденту: 28.04.2025, 29.04.2026"
+   },
+   {
+    "id": "cbr-2027-04-30",
+    "date": "2027-04-30",
+    "kind": "cbr_forecast",
+    "title": "Заседание Совета директоров Банка России по ключевой ставке (опорное: среднесрочный прогноз)",
+    "confirmed": true,
+    "precision": "day",
+    "days": 211,
+    "note": "решение в 13:30 МСК; публикация среднесрочного прогноза — вход миров (новая версия книги)"
+   },
+   {
+    "id": "ras-2027M04",
+    "date": "2027-05-13",
+    "kind": "ras",
+    "title": "РСБУ банка за апрель 2027 г. (релиз; 4 мес. нарастающим)",
+    "confirmed": false,
+    "precision": "window",
+    "days": 224,
+    "covers": "2027M04",
+    "earliest": "2027-05-12",
+    "latest": "2027-05-17",
+    "note": "оценка по прецеденту: 14.05.2024, 15.05.2025, 13.05.2026 (после майских праздников)"
+   },
+   {
+    "id": "ras-2027M05",
+    "date": "2027-06-09",
+    "kind": "ras",
+    "title": "РСБУ банка за май 2027 г. (релиз; 5 мес. нарастающим)",
+    "confirmed": false,
+    "precision": "window",
+    "days": 251,
+    "covers": "2027M05",
+    "earliest": "2027-06-08",
+    "latest": "2027-06-11",
+    "note": "оценка по прецеденту: 11.06.2024, 10.06.2025, 09.06.2026"
+   },
+   {
+    "id": "cbr-2027-06-11",
+    "date": "2027-06-11",
+    "kind": "cbr_rate",
+    "title": "Заседание Совета директоров Банка России по ключевой ставке",
+    "confirmed": true,
+    "precision": "day",
+    "days": 253,
+    "note": "решение в 13:30 МСК"
+   },
+   {
+    "id": "agm-2027",
+    "date": "2027-06-30",
+    "kind": "agm",
+    "title": "Годовое общее собрание акционеров: дивиденды за 2026 г.",
+    "confirmed": false,
+    "precision": "window",
+    "days": 272,
+    "earliest": "2027-06-15",
+    "latest": "2027-06-30",
+    "note": "оценка по прецеденту: ГОСА 30.06.2026; ГОСА в июне 2024–2026 (МСФО вычитает дивиденд во 2К); рекомендация Наблюдательного совета — обычно в конце апреля"
+   },
+   {
+    "id": "ras-2027M06",
+    "date": "2027-07-09",
+    "kind": "ras",
+    "title": "РСБУ банка за июнь 2027 г. (релиз; 6 мес. нарастающим)",
+    "confirmed": false,
+    "precision": "window",
+    "days": 281,
+    "covers": "2027M06",
+    "earliest": "2027-07-08",
+    "latest": "2027-07-13",
+    "note": "оценка по прецеденту: 09.07.2024, 09.07.2025, 09.07.2026"
+   },
+   {
+    "id": "record-2027",
+    "date": "2027-07-19",
+    "kind": "record",
+    "title": "Дата закрытия реестра (отсечка) по дивидендам за 2026 г.",
+    "confirmed": false,
+    "precision": "window",
+    "days": 291,
+    "earliest": "2027-07-09",
+    "latest": "2027-07-23",
+    "note": "оценка по прецеденту: отсечки 11.07.2024, 18.07.2025, 20.07.2026 (T+1: экс-дата = отсечка); выплата — через ≈2 недели"
+   },
+   {
+    "id": "ifrs-2027Q2",
+    "date": "2027-07-29",
+    "kind": "ifrs",
+    "title": "МСФО группы за 2К и 6М 2027 г.",
+    "confirmed": false,
+    "precision": "window",
+    "days": 301,
+    "covers": "2027Q2",
+    "earliest": "2027-07-27",
+    "latest": "2027-07-30",
+    "note": "оценка по прецеденту: 29.07.2025, 29.07.2026"
+   },
+   {
+    "id": "cbr-2027-07-30",
+    "date": "2027-07-30",
+    "kind": "cbr_forecast",
+    "title": "Заседание Совета директоров Банка России по ключевой ставке (опорное: среднесрочный прогноз)",
+    "confirmed": true,
+    "precision": "day",
+    "days": 302,
+    "note": "решение в 13:30 МСК; публикация среднесрочного прогноза — вход миров (новая версия книги)"
+   },
+   {
+    "id": "ras-2027M07",
+    "date": "2027-08-10",
+    "kind": "ras",
+    "title": "РСБУ банка за июль 2027 г. (релиз; 7 мес. нарастающим)",
+    "confirmed": false,
+    "precision": "window",
+    "days": 313,
+    "covers": "2027M07",
+    "earliest": "2027-08-09",
+    "latest": "2027-08-12",
+    "note": "оценка по прецеденту: 09.08.2024, 11.08.2025, 11.08.2026"
+   },
+   {
+    "id": "ras-2027M08",
+    "date": "2027-09-09",
+    "kind": "ras",
+    "title": "РСБУ банка за август 2027 г. (релиз; 8 мес. нарастающим)",
+    "confirmed": false,
+    "precision": "window",
+    "days": 343,
+    "covers": "2027M08",
+    "earliest": "2027-09-08",
+    "latest": "2027-09-10",
+    "note": "оценка по прецеденту: 10.09.2024, 09.09.2025, 09.09.2026"
+   },
+   {
+    "id": "cbr-2027-09-10",
+    "date": "2027-09-10",
+    "kind": "cbr_rate",
+    "title": "Заседание Совета директоров Банка России по ключевой ставке",
+    "confirmed": true,
+    "precision": "day",
+    "days": 344,
+    "note": "решение в 13:30 МСК"
+   }
+  ],
+  "recent": []
+ },
+ "checks": {
+  "flags": [
+   {
+    "name": "book_update",
+    "title": "Книгу пора обновить",
+    "raised": false,
+    "detail": null
+   },
+   {
+    "name": "report_fact",
+    "title": "Вышла МСФО, факт не внесён",
+    "raised": false,
+    "detail": null
+   },
+   {
+    "name": "dividend_register",
+    "title": "Квартал ГОСА прошёл, объявления нет в реестре",
+    "raised": false,
+    "detail": null
+   },
+   {
+    "name": "ni_jump",
+    "title": "Прибыль квартала г/г прыгает при неизменной ключевой",
+    "raised": false,
+    "detail": null
+   },
+   {
+    "name": "dividend_recommended",
+    "title": "Совет директоров рекомендовал дивиденд",
+    "raised": false,
+    "detail": null
+   },
+   {
+    "name": "explanation_expiring",
+    "title": "Срок объяснения проверки истекает",
+    "raised": true,
+    "detail": "Путь года вне гайденса — объяснение действует до 28.10.2026"
+   },
+   {
+    "name": "policy_expired",
+    "title": "Срок дивидендной политики истёк: действует прежняя до новой",
+    "raised": false,
+    "detail": null
+   },
+   {
+    "name": "price_fallback",
+    "title": "Живая цена не принята",
+    "raised": false,
+    "detail": null
+   },
+   {
+    "name": "ras_mismatch",
+    "title": "РСБУ месяца: источники расходятся",
+    "raised": false,
+    "detail": null
+   }
+  ],
+  "invariants_broken": 0
+ },
+ "live": {
+  "degraded": [],
+  "degraded_flag": false
+ },
+ "next_report": {
+  "period": "2026Q3",
+  "closing": {
+   "id": "ifrs-2026Q3",
+   "date": "2026-10-28",
+   "title": "МСФО группы за 3К и 9М 2026 г.",
+   "confirmed": true,
+   "precision": "day",
+   "earliest": null,
+   "latest": null,
+   "published": false
+  }
+ },
+ "valuation_history": {
+  "date": [
+   "2026-10-02"
+  ],
+  "sha": [
+   "357d61f8ec5e"
+  ],
+  "median": [
+   348.6
+  ],
+  "p10": [
+   251.37
+  ],
+  "p25": [
+   293.5
+  ],
+  "p75": [
+   406.39
+  ],
+  "p90": [
+   456.45
+  ],
+  "point": [
+   379.4
+  ],
+  "price": {
+   "SBER": [
+    276.29
+   ],
+   "SBERP": [
+    277.06
+   ]
+  },
+  "rollbacks": [],
+  "book_changes": [],
+  "rule": "день — последняя строка дня (МСК); старше 180 дней — недели; старше двух лет — месяца; не больше 400 строк",
+  "source": "журнал опубликованных выпусков (репозиторий данных)"
+ },
+ "book": {
+  "version": "1.3",
+  "date": "2026-09-30"
+ }
+}

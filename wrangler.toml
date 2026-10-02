@@ -1,0 +1,37 @@
+# Конфигурация Cloudflare Pages хаба как код (по образцу витрин семейства).
+#
+# Выкладка — GitHub Actions (.github/workflows/deploy.yml) на каждый push в
+# main, или вручную с ноутбука:
+#     npx wrangler@4.135.0 pages deploy web --project-name tzi-846 --branch main
+# Метка --branch обязана совпадать с производственной веткой проекта (main),
+# иначе выкладка молча уйдёт в предпросмотр.
+#
+# Пароль хаба — СЕКРЕТ проекта, не переменная этого файла:
+#     npx wrangler@4.135.0 pages secret put HUB_PASSWORD --project-name tzi-846
+# Без секрета хаб закрыт целиком (503), а не открыт.
+
+name = "tzi-846"
+
+# Каталог статики. Функции wrangler ищет не внутри него, а в `functions/` рядом.
+pages_build_output_dir = "web"
+
+# Дата фиксирует поведение рантайма. global_fetch_strictly_public — подзапросы
+# к другим *.pages.dev (витринам моделей) идут как обычные публичные запросы:
+# без флага запрос к соседу по зоне pages.dev может уйти мимо его функций.
+compatibility_date = "2026-08-01"
+compatibility_flags = ["global_fetch_strictly_public"]
+
+# Переменные хаба (не секреты):
+#   REGISTRY_URL       — «живой» реестр моделей: registry.json основной ветки
+#                        репозитория на GitHub. Новая модель видна через
+#                        ~5 минут после коммита, без перевыкладки; недоступен
+#                        или битый — берётся реестр, вшитый в выкладку.
+#   HISTORY_BASE_URL   — каталог истории оценок (ветка `history`, её пишет
+#                        .github/workflows/snapshot.yml); файл модели — <slug>.json.
+#   HUB_SESSION_EPOCH  — поколение сессий. Поднять (2, 3, …) и перевыложить —
+#                        все устройства забудутся и спросят пароль снова.
+# HEAD в адресе raw — ветка репозитория по умолчанию, какой бы она ни была.
+[vars]
+REGISTRY_URL = "https://raw.githubusercontent.com/ML371KL/temp-zero-inode-846/HEAD/registry.json"
+HISTORY_BASE_URL = "https://raw.githubusercontent.com/ML371KL/temp-zero-inode-846/history/"
+HUB_SESSION_EPOCH = "1"

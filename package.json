@@ -1,0 +1,13 @@
+{
+  "name": "tzi-846-hub",
+  "private": true,
+  "description": "Модели 850 — хаб справедливых стоимостей российских акций (Cloudflare Pages)",
+  "type": "module",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "test": "node --test \"tests/*.test.mjs\"",
+    "snapshot": "node tools/snapshot.mjs --dir history",
+    "dev": "npx wrangler@4.135.0 pages dev web --binding HUB_PASSWORD=dev",
+    "deploy": "npx wrangler@4.135.0 pages deploy web --project-name tzi-846 --branch main"
+  }
+}

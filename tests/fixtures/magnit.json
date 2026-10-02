@@ -1,0 +1,206 @@
+{
+ "schema": "magnit-v5.1",
+ "meta": {
+  "generated_at": "2026-10-01T16:50:55+00:00",
+  "valuation_date": "2026-10-01",
+  "facts_date": "2026-06-30",
+  "book_version": "1.6",
+  "horizon": [
+   "2026H2",
+   "2036H2"
+  ],
+  "basis": "до МСФО 16",
+  "periods_closed": 0,
+  "open_period": "2026H2",
+  "book_first_period_closed": false,
+  "shares_mln": 67.847,
+  "governance_discount": 0.1,
+  "payload_sha256": "24573181cc8a0d015851d74c123d5083e123db5e29256ec1196910edfb937c43",
+  "bytes": 206351
+ },
+ "market": {
+  "price": 1575,
+  "cap": 106.9,
+  "sellside": {
+   "median": 2450,
+   "mean": 2803,
+   "min": 1500,
+   "max": 4400,
+   "n": 9,
+   "as_of": "2026-09-05",
+   "note": "справочно, без дат отдельных целей; внешняя сверка 22.09.2026 нашла в агрегаторах только 3 действующие цели (среднее ≈2 090, 1 760–2 500), максимум 4 400 заведомо устарел"
+  }
+ },
+ "fair_value": {
+  "method": "structural",
+  "low": 1369,
+  "central": 1470,
+  "high": 1571,
+  "printed_low": 1350,
+  "printed_central": 1450,
+  "printed_high": 1550,
+  "rates_view": {
+   "rub": 202,
+   "v0": 15.3,
+   "low": 1369.4,
+   "high": 1571.4,
+   "printed_low": 1350,
+   "printed_high": 1550,
+   "point": 1470.4,
+   "own_macro_confidence": 0.5
+  },
+  "by_world": {
+   "N": 2345,
+   "H": 1102,
+   "M": 1369
+  },
+  "ev_comparison": {
+   "layer": "analytical",
+   "ev_model": 678.8,
+   "ev_market_implied": 665.6,
+   "gap": 0.0199,
+   "ebitda_ltm": 179.66,
+   "ev_ebitda_model": 3.78,
+   "ev_ebitda_market": 3.7
+  },
+  "headline": {
+   "method": "judgement_median",
+   "median": 1294.6,
+   "printed_median": 1300,
+   "band80": [
+    266.2,
+    2545.2
+   ],
+   "printed_band80": [
+    250,
+    2550
+   ],
+   "band50": [
+    691.6,
+    1983.7
+   ],
+   "printed_band50": [
+    700,
+    2000
+   ],
+   "point": 1470.4,
+   "printed_point": 1450,
+   "mean": 1378.5,
+   "market": 1575,
+   "p_below_market": 0.608,
+   "market_percentile": 0.608,
+   "draws": 2000,
+   "seed": 20260918,
+   "own_macro_confidence": 0.5,
+   "print_step": 50
+  }
+ },
+ "worlds": {
+  "N": {
+   "title": "Нормализация"
+  },
+  "H": {
+   "title": "Высокие ставки надолго"
+  },
+  "M": {
+   "title": "Рыночный как есть"
+  }
+ },
+ "calendar": {
+  "today": "2026-10-01",
+  "next_fact": {
+   "id": "magnit.fy2026",
+   "when": "2027-04-30",
+   "precision": "month",
+   "title": "ПАО «Магнит»: МСФО за 2026 год",
+   "days": 211,
+   "note": "ФАКТ, а не приор. Первая вневыборочная точка слоя индикаторов: всё, что записано в журнал до этой даты, здесь и проверяется."
+  },
+  "events": [
+   {
+    "id": "cbr.key_rate.october",
+    "when": "2026-10-23",
+    "precision": "month",
+    "title": "Заседание Совета директоров ЦБ по ключевой ставке",
+    "days": 22,
+    "gives": [
+     "key_rate"
+    ],
+    "prior_for": "magnit.net_interest",
+    "note": "Точное расписание публикуется ЦБ на год вперёд; здесь стоит месяц, потому что переписывать дату из памяти — способ ошибиться незаметно."
+   },
+   {
+    "id": "x5.q3_2026",
+    "when": "2026-10-31",
+    "precision": "month",
+    "title": "ИКС 5: операционные и финансовые результаты 3-го квартала",
+    "days": 30,
+    "gives": [
+     "margin_yoy",
+     "lfl_ticket",
+     "lfl_traffic"
+    ],
+    "prior_for": null,
+    "note": "Справочно: первый ориентир по 2П2026 у сопоставимой сети. В нау-каст маржи не входит: перенос изменения маржи X5 на Магнит неустойчив и по величине, и по знаку."
+   },
+   {
+    "id": "lenta.q3_2026",
+    "when": "2026-10-31",
+    "precision": "month",
+    "title": "Лента: результаты 3-го квартала",
+    "days": 30,
+    "gives": [
+     "margin_yoy"
+    ],
+    "prior_for": null,
+    "note": "Справочно: результаты сопоставимой сети. Лента меньше и растёт сделками; в нау-каст маржи не входит."
+   },
+   {
+    "id": "mrot.2027",
+    "when": "2026-12-01",
+    "precision": "month",
+    "title": "МРОТ на 2027 год: федеральный закон",
+    "days": 61,
+    "gives": [
+     "wage_floor"
+    ],
+    "prior_for": "magnit.ebitda_margin_pre16",
+    "note": "Детерминированный вход, а не прогноз: после подписания закона величина известна точно. Поднимает нижнюю границу зарплатной сетки в регионах с низкой базой."
+   },
+   {
+    "id": "tander.rsbu_2026",
+    "when": "2027-03-30",
+    "precision": "month",
+    "title": "АО «Тандер»: РСБУ за 2026 год (ГИР БО)",
+    "days": 180,
+    "gives": [
+     "net_debt",
+     "trade_payables",
+     "gross_margin"
+    ],
+    "prior_for": null,
+    "note": "Проверка долга, торговой кредиторки и валовой маржи за ≈30 дней до МСФО, не приор EBITDA: «Тандер» — основная операционная компания группы."
+   },
+   {
+    "id": "x5.fy2026",
+    "when": "2027-03-31",
+    "precision": "month",
+    "title": "ИКС 5: годовые результаты 2026",
+    "days": 181,
+    "gives": [
+     "margin_yoy"
+    ],
+    "prior_for": null,
+    "note": "Справочно: выходит примерно за месяц до годового отчёта Магнита. Маржа в нау-каст не входит."
+   }
+  ]
+ },
+ "checks": {
+  "invariants_broken": 0
+ },
+ "live": {
+  "degraded": [],
+  "degraded_flag": false,
+  "price_reference_date": "2026-10-01"
+ }
+}

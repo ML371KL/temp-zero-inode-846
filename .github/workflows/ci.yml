@@ -1,0 +1,24 @@
+# Проверки хаба: тесты (node --test, без зависимостей) и сборка функций Pages
+# тем же wrangler, что выкладывает (ловит ошибки импорта и маршрутов до выкладки).
+name: ci
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Тесты
+        run: npm test
+      - name: Сборка функций Pages
+        run: npx --yes wrangler@4.135.0 pages functions build --outdir "$RUNNER_TEMP/functions-build"

@@ -1,0 +1,48 @@
+{
+  "title": "Модели 850",
+  "target": 55,
+  "models": [
+    {
+      "slug": "magnit",
+      "name": "Магнит",
+      "tickers": ["MGNT"],
+      "sector": "Ритейл",
+      "url": "https://tzi-850oa.pages.dev",
+      "aliases": ["Магнит", "Тандер"],
+      "status": "live"
+    },
+    {
+      "slug": "x5",
+      "name": "X5",
+      "tickers": ["X5"],
+      "sector": "Ритейл",
+      "url": "https://tzi-850-x5.pages.dev",
+      "aliases": ["X5", "ИКС 5", "Икс 5"],
+      "data": ["https://raw.githubusercontent.com/ML371KL/temp-zero-inode-850-x5/data/latest.json"],
+      "status": "live"
+    },
+    {
+      "slug": "lenta",
+      "name": "Лента",
+      "tickers": ["LENT"],
+      "sector": "Ритейл",
+      "url": "https://tzi-850-lenta.pages.dev",
+      "aliases": ["Лента", "«Лента»"],
+      "data": ["https://ml371kl.github.io/temp-zero-inode-850-lenta-data/latest.json"],
+      "status": "live"
+    },
+    {
+      "slug": "sber",
+      "name": "Сбербанк",
+      "tickers": ["SBER", "SBERP"],
+      "sector": "Банки",
+      "url": "https://tzi-850-sber.pages.dev",
+      "aliases": ["Сбербанк", "Сбер"],
+      "data": [
+        "https://ml371kl.github.io/temp-zero-inode-850-sber-data/latest.json",
+        "https://raw.githubusercontent.com/ML371KL/temp-zero-inode-850-sber-data/release/latest.json"
+      ],
+      "status": "live"
+    }
+  ]
+}

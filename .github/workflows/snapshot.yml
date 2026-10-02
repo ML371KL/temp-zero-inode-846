@@ -1,0 +1,57 @@
+# Снимок истории оценок: медиана, полосы, точка и цена каждой модели реестра
+# (tools/snapshot.mjs) → ветка `history` этого репозитория, файл на модель.
+# Хаб читает её через /api/history/<slug> (HISTORY_BASE_URL в wrangler.toml).
+#
+# Дважды в день: утром — после ночных выпусков, вечером — после дневных
+# (модели семейства публикуются вечером и ночью по Москве). Ветку `history`
+# джоб создаёт сам при первом запуске; в ней только данные, код — в основной.
+name: snapshot
+
+on:
+  schedule:
+    - cron: "17 4 * * *"     # 07:17 МСК
+    - cron: "47 19 * * *"    # 22:47 МСК
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: snapshot-history
+  cancel-in-progress: false
+
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Рабочая копия ветки history
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          remote="https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          if git ls-remote --exit-code --heads "$remote" history >/dev/null 2>&1; then
+            git clone --quiet --depth 1 --branch history "$remote" history
+          else
+            mkdir history
+            git -C history init --quiet -b history
+            git -C history remote add origin "$remote"
+            printf '%s\n' "# История оценок хаба" "" "Данные для /api/history/<slug>: пишет .github/workflows/snapshot.yml основной ветки. Руками не править." > history/README.md
+          fi
+      - name: Снимок
+        run: node tools/snapshot.mjs --dir history
+      - name: Коммит и push
+        run: |
+          cd history
+          git add -A
+          if git diff --cached --quiet; then
+            echo "изменений нет"
+            exit 0
+          fi
+          git -c user.name="hub-snapshot[bot]" -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
+            commit --quiet -m "снимок $(date -u +%Y-%m-%dT%H:%MZ)"
+          git push --quiet origin history
