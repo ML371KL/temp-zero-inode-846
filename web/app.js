@@ -688,7 +688,6 @@ function appendRow(tbody, r, dom) {
   const open = state.expanded.has(entry.slug);
   const fr = freshness(card);
   const tickers = list(entry.tickers).join(" · ");
-  const rel = obj(card.release);
   const dot = attachTip(el("span", { class: "dot", "data-state": fr.state, role: "img", "aria-label": fr.label }), () => releaseTip(card, fr));
   const co = el("td", { class: "c-co" }, el("div", { class: "co" }, coIcon(entry),
     el("div", { style: { minWidth: "0" } }, el("span", { class: "co-name" }, entry.name, " ", dot),
