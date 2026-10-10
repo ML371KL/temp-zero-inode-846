@@ -246,6 +246,8 @@ const RE_REPORT = /ifrs|(^|[^a-z])ras|rsbu|trading|result|report|(^|[^a-z])(fy|q
 const RE_CORPORATE = /investor|strategy|capital_markets|buyback|split|(^|[^a-z])(spo|ipo|ir)([^a-z]|$)/i;
 const RE_MINOR_KIND = /^(ras|form\d+)([-._]|$)/i;
 const RE_MINOR_TITLE = new RegExp(`форм\\S* 0409|рсбу[^.]*за (${MONTHS})\\S* \\d{4}`, "i");
+// Период события «2026M09» — отчёт за один месяц: РСБУ Сбера, операционный релиз Т.
+const RE_MONTH_PERIOD = /^\d{4}M\d{2}$/;
 
 // Сначала вид события (у X5 и Сбера — чистое перечисление, у Магнита и Ленты —
 // идентификатор вида «lenta.q3_2026»), затем заголовок.
@@ -275,7 +277,7 @@ function normalizeEvent(e) {
     title: title.slice(0, 200),
     kind,
     cls,
-    minor: cls === "report" && (RE_MINOR_KIND.test(String(kind || "")) || RE_MINOR_TITLE.test(title)),
+    minor: cls === "report" && (RE_MINOR_KIND.test(String(kind || "")) || RE_MINOR_TITLE.test(title) || RE_MONTH_PERIOD.test(String(e.covers || ""))),
     precision,
     confirmed: e.confirmed === true || (e.confirmed !== false && precision === "day"),
     earliest: isoDate(e.earliest),

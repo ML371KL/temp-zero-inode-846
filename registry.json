@@ -43,6 +43,20 @@
         "https://raw.githubusercontent.com/ML371KL/temp-zero-inode-850-sber-data/release/latest.json"
       ],
       "status": "live"
+    },
+    {
+      "slug": "t",
+      "name": "Т-Технологии",
+      "tickers": ["T"],
+      "sector": "Банки",
+      "url": "https://tzi-850-t.pages.dev",
+      "aliases": ["Т-Технологии", "Т-Банк", "T-Технологии", "T-Банк"],
+      "data": [
+        "https://ml371kl.github.io/temp-zero-inode-850-t-data/latest.json",
+        "https://raw.githubusercontent.com/ML371KL/temp-zero-inode-850-t-data/release/latest.json"
+      ],
+      "status": "live",
+      "added": "2026-10-10"
     }
   ]
 }

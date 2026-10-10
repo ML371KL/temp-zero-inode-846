@@ -1,10 +1,10 @@
 # Модели 850: хаб справедливых стоимостей российских акций
 
-Одна страница для всех моделей семейства «850»: Магнит, X5, Лента, Сбербанк и
-следующие (по одной в неделю, цель — около 55). Хаб ничего не считает заново.
-Он читает выпуск каждой модели через её публичную дверь `/api/model`, сводит
-главное в одну таблицу и ведёт на экраны самой модели. Сами модели и их
-дашборды хаб не трогает.
+Одна страница для всех моделей семейства «850»: Магнит, X5, Лента, Сбербанк,
+Т-Технологии и следующие (по одной в неделю, цель — около 55). Хаб ничего не
+считает заново. Он читает выпуск каждой модели через её публичную дверь
+`/api/model`, сводит главное в одну таблицу и ведёт на экраны самой модели.
+Сами модели и их дашборды хаб не трогает.
 
 - Адрес: **https://tzi-846.pages.dev**, вход по паролю. Пароль спрашивается
   один раз, дальше устройство запоминается.
@@ -68,7 +68,7 @@
   пометкой. Если нет и её — строка «нет данных» с причиной: остальной хаб
   работает.
 - **Разные контракты.** Выпуски моделей устроены по-разному (`magnit-v5.1`,
-  `x5-v1`, `lenta-v1`, `sber-v1`). Сводка читает общий путь семейства
+  `x5-v1`, `lenta-v1`, `sber-v1`, `t-v1`). Сводка читает общий путь семейства
   (`fair_value.headline`) с запасными путями. Модель, собранная по образцу
   Ленты или Сбера, читается без правок хаба (раздел «Совместимость»).
 
@@ -167,7 +167,7 @@ npx wrangler@4.135.0 pages deploy web --project-name tzi-846 --branch main
 | `schema`, `meta.published_at` (или `generated_at`), `meta.valuation_date`, `meta.facts_date`, `meta.book_version`, `meta.payload_sha256` | выпуск и свежесть |
 | `fair_value.headline.{median, printed_median, band80, band50, printed_band80, printed_band50, point, printed_point, p_below_market, market}` | оценка и полоса (у X5 те же числа лежат в `headline.{central, band, inner, …}`, и это тоже читается) |
 | `market.price`, `market.price_date` (или `market.prices.<тикер>`) | рынок |
-| `calendar.events[]` (`date`/`when`, `title`, `kind`/`id`, `precision`), `calendar.next_fact` | календарь и «ближайший отчёт» |
+| `calendar.events[]` (`date`/`when`, `title`, `kind`/`id`, `precision`, `covers`), `calendar.next_fact` | календарь и «ближайший отчёт»; отчёт за один месяц (`covers` вида `2026M09`: РСБУ Сбера, операционный релиз Т) — мелкое событие, в «ближайший отчёт» не идёт |
 | по желанию: `market.sellside`/`market.brokers`, `dividends.next_expected`, `market.multiples`, `fair_value.by_world`, `checks.flags`, `live.degraded_flag`, `valuation_history` | брокеры, дивиденд, мультипликаторы, миры, предупреждения, история |
 
 Если поля нет, в хабе стоит «—». Если путь иной, его добавляют в
@@ -186,14 +186,14 @@ npx wrangler@4.135.0 pages deploy web --project-name tzi-846 --branch main
 | `functions/_lib/` | `summarize.js` (сводка выпуска), `sources.js` (чтение выпуска и вкладок модели), `registry.js`, `history.js`, `auth.js`, `pages.js` (страницы входа), `csp.js` |
 | `tools/snapshot.mjs` | снимок истории (его запускает `.github/workflows/snapshot.yml`) |
 | `tools/trim-fixture.mjs` | фикстура теста из выпуска модели |
-| `tests/` | `node --test`: сводка четырёх контрактов, пароль и ворота, двери данных, история, статика |
+| `tests/` | `node --test`: сводка пяти контрактов, пароль и ворота, двери данных, история, статика |
 | `.github/workflows/` | `ci.yml` (тесты и сборка функций), `deploy.yml` (выкладка), `snapshot.yml` (история) |
 | `wrangler.toml` | проект Pages и переменные (`REGISTRY_URL`, `HISTORY_BASE_URL`, `HUB_SESSION_EPOCH`) |
 
 ## Локально
 
 ```bash
-npm test                                                      # 32 теста, без зависимостей (Node ≥ 20)
+npm test                                                      # 33 теста, без зависимостей (Node ≥ 20)
 npx wrangler@4.135.0 pages dev web --binding HUB_PASSWORD=dev # http://localhost:8788, пароль «dev»
 node tools/snapshot.mjs --dir /tmp/history                    # снимок истории в каталог
 ```

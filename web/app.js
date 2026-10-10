@@ -1224,7 +1224,7 @@ function calendarScreen() {
     el("button", { class: "pill-btn", type: "button", "aria-pressed": String(p.calCls === k), onclick: () => { p.calCls = k; savePrefs(); render(); } }, t));
   const daysBtns = [[30, "30 дней"], [90, "90 дней"], [182, "полгода"], [400, "год"]].map(([k, t]) =>
     el("button", { class: "pill-btn", type: "button", "aria-pressed": String(p.calDays === k), onclick: () => { p.calDays = k; savePrefs(); render(); } }, t));
-  const minor = el("label", { class: "toggle" }, el("input", { type: "checkbox", checked: p.calMinor, onchange: (e) => { p.calMinor = e.target.checked; savePrefs(); render(); } }), "мелкие: РСБУ по месяцам, формы ЦБ");
+  const minor = el("label", { class: "toggle" }, el("input", { type: "checkbox", checked: p.calMinor, onchange: (e) => { p.calMinor = e.target.checked; savePrefs(); render(); } }), "мелкие: месячные релизы, формы ЦБ");
 
   const months = new Map();
   for (const e of evs) { const k = e.date.slice(0, 7); if (!months.has(k)) months.set(k, []); months.get(k).push(e); }

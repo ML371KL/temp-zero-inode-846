@@ -1,5 +1,6 @@
-// Сводка выпусков четырёх моделей семейства: что хаб читает из каждого контракта.
-// Фикстуры — урезанные настоящие выпуски 01.10.2026 (tools/trim-fixture.mjs).
+// Сводка выпусков пяти моделей семейства: что хаб читает из каждого контракта.
+// Фикстуры — урезанные настоящие выпуски 01.10.2026, у Т-Технологий — 09.10.2026
+// (tools/trim-fixture.mjs).
 
 import test from "node:test";
 import assert from "node:assert/strict";
@@ -80,6 +81,35 @@ test("Сбербанк (sber-v1): две категории акций, реко
   assert.equal(c.health.warn, true, "первый период книги закрыт — жёлтый, как фишка выпуска на витрине Сбера");
   assert.ok(c.health.notes.some((n) => n.level === "info" && /объяснения/.test(n.text)));
   assert.equal(c.next_report.date, "2026-10-28", "ежемесячная РСБУ — мелкое событие, ближайший отчёт — МСФО");
+});
+
+test("Т-Технологии (t-v1): объявленный дивиденд, месячные релизы — мелкие, отчёт — МСФО", () => {
+  const c = summarize(registry.models.find((m) => m.slug === "t"), fixture("t"), { others, today: "2026-10-10" });
+  assert.equal(c.schema, "t-v1");
+  assert.equal(c.ticker, "T");
+  assert.equal(c.fair.median, 313.73);
+  assert.equal(c.fair.printed_median, 315);
+  assert.deepEqual(c.fair.printed_band80, [235, 390]);
+  assert.deepEqual(c.fair.printed_band50, [270, 355]);
+  assert.equal(c.fair.printed_point, 330);
+  assert.equal(c.fair.p_below, 0.254);
+  assert.equal(c.price.value, 269.46);
+  assert.ok(Math.abs(c.upside - (313.73 / 269.46 - 1)) < 1e-12);
+  assert.deepEqual(c.others, []);
+  assert.equal(c.brokers.median, 400);
+  assert.equal(c.brokers.n, 13);
+  assert.equal(c.dividend.dps, 4.7);
+  assert.equal(c.dividend.record_date, "2026-10-12");
+  assert.equal(c.dividend.record_estimated, false);
+  assert.equal(c.multiples.pb, 0.9008);
+  assert.equal(c.cap, 722.89);
+  assert.equal(c.health.warn, true, "первый период книги закрыт — жёлтый, как фишка выпуска на витрине");
+  const monthly = c.events.filter((e) => e.kind === "ops_release");
+  assert.ok(monthly.length > 0 && monthly.every((e) => e.minor), "операционный релиз за месяц — мелкое событие, как РСБУ Сбера");
+  assert.equal(c.next_report.kind, "ifrs", "ближайший отчёт — МСФО, а не месячный релиз");
+  assert.equal(c.next_report.date, "2026-11-19");
+  assert.equal(c.next_report.precision, "window");
+  assert.equal(c.next_fact.date, "2026-11-19");
 });
 
 test("календарь: чужие отчёты приписаны своей компании, макро — без компании", () => {
