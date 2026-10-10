@@ -17,13 +17,18 @@
  *   data     запасные адреса того же выпуска (raw/Pages репозитория данных);
  *   status   live | planned (planned — строка «в работе», без данных);
  *   added    дата появления в хабе (ГГГГ-ММ-ДД), необязательно;
- *   note     короткая пометка для каталога, необязательно.
+ *   note     короткая пометка для каталога, необязательно;
+ *   mark     знак компании на плитке, 1–3 символа («С», «X5»); нет — первые
+ *            две буквы основного тикера;
+ *   color    цвет плитки, с которым компанию узнают (#rrggbb); нет — нейтральная;
+ *   ink      цвет знака (#rrggbb); нет — белый или чёрный по контрасту с плиткой.
  */
 
 import bundled from "../../registry.json" with { type: "json" };
 
 const SLUG_RE = /^[a-z0-9][a-z0-9-]{0,39}$/;
 const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
+const HEX_RE = /^#[0-9a-f]{6}$/i;
 const LIVE_TIMEOUT_MS = 4000;
 const LIVE_CACHE_SECONDS = 300;
 
@@ -69,6 +74,9 @@ function normalizeEntry(item) {
     status,
     added: DATE_RE.test(str(item.added) || "") ? item.added : null,
     note: str(item.note) ? String(item.note).slice(0, 200) : null,
+    mark: str(item.mark) && [...str(item.mark)].length <= 3 ? str(item.mark) : null,
+    color: hex(item.color),
+    ink: hex(item.ink),
   };
 }
 
@@ -96,6 +104,11 @@ function str(value) {
 
 function list(value) {
   return Array.isArray(value) ? value : [];
+}
+
+function hex(value) {
+  const s = str(value);
+  return s && HEX_RE.test(s) ? s.toLowerCase() : null;
 }
 
 function httpsUrl(value) {

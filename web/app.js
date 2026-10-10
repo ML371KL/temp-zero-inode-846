@@ -376,16 +376,28 @@ function responsive(draw, cls) {
   return host;
 }
 
-/* ── иконка компании ── */
+/* ── плитка компании: знак и цвет из реестра (mark, color, ink); хаб рисует её
+   сам, без запросов к витринам. Нет цвета — нейтральная плитка. ── */
 
-function coIcon(entry, size) {
-  const letters = (list(entry.tickers)[0] || entry.name || "?").slice(0, 2).toUpperCase();
-  const box = el("span", { class: "co-icon", "aria-hidden": "true" }, letters);
-  if (entry.url) {
-    const img = el("img", { src: `${entry.url}/favicon.svg`, alt: "", loading: "lazy", width: size || 30, height: size || 30, referrerpolicy: "no-referrer" });
-    img.addEventListener("load", () => { box.textContent = ""; box.append(img); }, { once: true });
+function coIcon(entry) {
+  const mark = entry.mark || (list(entry.tickers)[0] || entry.name || "?").slice(0, 2).toUpperCase();
+  const box = el("span", { class: "co-icon", "aria-hidden": "true", "data-len": [...mark].length }, mark);
+  if (entry.color) {
+    box.classList.add("is-brand");
+    box.style.background = entry.color;
+    box.style.color = entry.ink || contrastInk(entry.color);
   }
   return box;
+}
+
+// Белый или чёрный знак — что контрастнее к цвету плитки (яркость WCAG).
+function contrastInk(hex) {
+  const [r, g, b] = [1, 3, 5].map((i) => {
+    const c = parseInt(hex.slice(i, i + 2), 16) / 255;
+    return c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4;
+  });
+  const lum = 0.2126 * r + 0.7152 * g + 0.0722 * b;
+  return 1.05 / (lum + 0.05) >= (lum + 0.05) / 0.05 ? "#ffffff" : "#121211";
 }
 
 function modelLink(entry, screen) {
@@ -1244,7 +1256,7 @@ function calItem(e) {
   const n = daysUntil(e.date);
   const entry = e.company ? entryOf(e.company) : null;
   const meta = el("div", { class: "cal-meta" });
-  if (entry) meta.append(el("a", { class: "cal-co", href: `#overview/${entry.slug}` }, coIcon(entry, 18), entry.name));
+  if (entry) meta.append(el("a", { class: "cal-co", href: `#overview/${entry.slug}` }, coIcon(entry), entry.name));
   else meta.append(el("span", {}, "Макро"));
   const note = eventPrecisionNote(e);
   if (note) meta.append(el("span", {}, note));
@@ -1279,7 +1291,7 @@ function modelCard(r) {
   const rel = obj(card.release);
   const f = obj(card.fair);
   const node = el("div", { class: "card mcard" },
-    el("div", { class: "mcard-top" }, coIcon(entry, 36),
+    el("div", { class: "mcard-top" }, coIcon(entry),
       el("div", { class: "mcard-title" }, el("b", {}, entry.name), el("span", { class: "co-meta" }, el("span", { class: "tick" }, list(entry.tickers).join(" · ")), ` · ${entry.sector}`)),
       el("span", { class: "state" }, el("span", { class: "dot", "data-state": fr.state }), stateWord(fr.state))));
   if (r.ok) {
@@ -1306,7 +1318,7 @@ function modelCard(r) {
 
 function plannedCard(m) {
   return el("div", { class: "card mcard is-planned" },
-    el("div", { class: "mcard-top" }, coIcon({ ...m, url: null }, 36),
+    el("div", { class: "mcard-top" }, coIcon(m),
       el("div", { class: "mcard-title" }, el("b", {}, m.name), el("span", { class: "co-meta" }, el("span", { class: "tick" }, list(m.tickers).join(" · ")), m.tickers && m.tickers.length ? " · " : "", m.sector)),
       el("span", { class: "state" }, el("span", { class: "dot", "data-state": "planned" }), "в работе")),
     el("p", { class: "small muted" }, m.note || (m.added ? `в планах с ${fmt.date(m.added)}` : "модель ещё строится")));

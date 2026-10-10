@@ -5,7 +5,7 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import { execFileSync } from "node:child_process";
 import { THEME_SCRIPT } from "../functions/_lib/pages.js";
-import { themeScriptHash } from "../functions/_lib/csp.js";
+import { themeScriptHash, staticCsp } from "../functions/_lib/csp.js";
 import { normalizeRegistry } from "../functions/_lib/registry.js";
 
 const read = (p) => fs.readFileSync(new URL(`../${p}`, import.meta.url), "utf8");
@@ -60,6 +60,20 @@ test("реестр: негодные записи отбрасываются, а
   assert.equal(reg.models[0].url, "https://a.pages.dev");
   assert.deepEqual(reg.models[0].aliases, ["Норма"]);
   assert.throws(() => normalizeRegistry({ models: [] }));
+});
+
+test("реестр: знак и цвета плитки — только годные, иначе null (нейтральная плитка)", () => {
+  const reg = normalizeRegistry({ models: [
+    { slug: "a", name: "А", url: "https://a.pages.dev", mark: "X5", color: "#5FB336", ink: "#fff" },
+    { slug: "b", name: "Б", url: "https://b.pages.dev", mark: "ДЛИННО", color: "red" },
+  ] });
+  assert.deepEqual([reg.models[0].mark, reg.models[0].color, reg.models[0].ink], ["X5", "#5fb336", null]);
+  assert.deepEqual([reg.models[1].mark, reg.models[1].color, reg.models[1].ink], [null, null, null]);
+});
+
+test("плитки компаний хаб рисует сам: картинок с витрин моделей нет ни в клиенте, ни в CSP", async () => {
+  assert.ok(!/favicon\.svg/.test(read("web/app.js")));
+  assert.ok(!/pages\.dev/.test(await staticCsp()));
 });
 
 test("wrangler.toml: проект tzi-846, статика web, флаг публичных подзапросов", () => {

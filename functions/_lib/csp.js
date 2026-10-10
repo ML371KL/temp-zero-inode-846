@@ -1,8 +1,8 @@
 /**
  * CSP статики хаба. Инлайн-скрипт темы в web/index.html разрешён хэшем; хэш
  * считается из THEME_SCRIPT (functions/_lib/pages.js) — того же текста, что
- * index.html обязан нести побайтно (тест tests/static.test.mjs). Модели
- * показывают свои значки (`<url>/favicon.svg`) — отсюда img-src *.pages.dev.
+ * index.html обязан нести побайтно (тест tests/static.test.mjs). Картинок с
+ * чужих адресов хаб не грузит: плитки компаний он рисует сам (web/app.js).
  */
 
 import { THEME_SCRIPT } from "./pages.js";
@@ -23,7 +23,7 @@ export async function staticCsp() {
     "default-src 'self'",
     `script-src 'self' '${await themeScriptHash()}'`,
     "style-src 'self' 'unsafe-inline'",
-    "img-src 'self' data: https://*.pages.dev",
+    "img-src 'self' data:",
     "connect-src 'self'",
     "font-src 'self'",
     "object-src 'none'",
