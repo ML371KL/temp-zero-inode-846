@@ -41,6 +41,12 @@
 - **Свежесть видна везде.** Точка у названия и фишка в шапке: зелёная —
   выпуск свежий, жёлтая — у выпуска предупреждения (так же, как фишка на
   дашборде модели), красная — выпуску больше 96 часов или модель не отвечает.
+  Жёлтый считается по правилу фишки на витрине самой модели, а оно у
+  контрактов разное: таблица `CHIP_RULES` в `functions/_lib/summarize.js`.
+  У Т и Сбера закрытый квартал книги до отчёта за него — справка, а не
+  тревога; желтят вышедший и не внесённый отчёт, просроченный ручной вход и
+  отставание книги больше чем на квартал. Витрина меняет правило фишки —
+  меняется и её строка в `CHIP_RULES`, иначе цвета разойдутся.
 - **Масштаб на 50–60 акций.** Фильтр по отраслям, поиск по названию и тикеру,
   сортировка по любому столбцу, группировка по отраслям. На телефоне таблица
   превращается в карточки.
@@ -178,7 +184,8 @@ npx wrangler@4.135.0 pages deploy web --project-name tzi-846 --branch main
 | `fair_value.headline.{median, printed_median, band80, band50, printed_band80, printed_band50, point, printed_point, p_below_market, market}` | оценка и полоса (у X5 те же числа лежат в `headline.{central, band, inner, …}`, и это тоже читается) |
 | `market.price`, `market.price_date` (или `market.prices.<тикер>`) | рынок |
 | `calendar.events[]` (`date`/`when`, `title`, `kind`/`id`, `precision`, `covers`), `calendar.next_fact` | календарь и «ближайший отчёт»; отчёт за один месяц (`covers` вида `2026M09`: РСБУ Сбера, операционный релиз Т) — мелкое событие, в «ближайший отчёт» не идёт |
-| по желанию: `market.sellside`/`market.brokers`, `dividends.next_expected`, `market.multiples`, `fair_value.by_world`, `checks.flags`, `live.degraded_flag`, `valuation_history` | брокеры, дивиденд, мультипликаторы, миры, предупреждения, история |
+| по желанию: `market.sellside`/`market.brokers`, `dividends.next_expected`, `market.multiples`, `fair_value.by_world`, `valuation_history` | брокеры, дивиденд, мультипликаторы, миры, история |
+| по желанию: `live.degraded_flag`, `checks.flags`, `checks.gates` (с `fired`), `gates` в корне, `meta.book_first_period_closed`, `meta.periods_closed` | предупреждения выпуска и жёлтая точка — по `CHIP_RULES` |
 
 Если поля нет, в хабе стоит «—». Если путь иной, его добавляют в
 соответствующий `pick…` в `functions/_lib/summarize.js` и закрепляют тестом
@@ -203,7 +210,7 @@ npx wrangler@4.135.0 pages deploy web --project-name tzi-846 --branch main
 ## Локально
 
 ```bash
-npm test                                                      # 35 тестов, без зависимостей (Node ≥ 20)
+npm test                                                      # 36 тестов, без зависимостей (Node ≥ 20)
 npx wrangler@4.135.0 pages dev web --binding HUB_PASSWORD=dev # http://localhost:8788, пароль «dev»
 node tools/snapshot.mjs --dir /tmp/history                    # снимок истории в каталог
 ```

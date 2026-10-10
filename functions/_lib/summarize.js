@@ -13,10 +13,34 @@
  * браузер распределения и сетки, только то, что показывает.
  */
 
-export const CARD_VERSION = 1;
+// Версия — часть ключа кэша края: меняется смысл полей карточки — поднять,
+// иначе «последняя годная» карточка (30 дней) вернёт прежний. 2 — жёлтый по
+// правилу фишки на витрине модели (CHIP_RULES).
+export const CARD_VERSION = 2;
 
-// Флаги выпусков, которые красят выпуск жёлтым (как фишка выпуска у моделей).
-const WARN_FLAGS = new Set(["price_fallback", "report_fact", "book_update", "dividend_register", "ras_mismatch"]);
+// Что желтит выпуск — правило фишки выпуска на витрине самой модели (releaseChip
+// в её web/app.js), а оно у контрактов разное. Последняя строка — правило Т и
+// Сбера: по их образцу собираются новые модели. Витрина поменяла правило —
+// менять и здесь, иначе хаб и витрина покажут разный цвет.
+//   flags   флаги checks.flags, которые желтят ("*" — любой поднятый);
+//   price   желтит market.price_status = "fallback";
+//   fired   сработавшие гейты checks.gates;
+//   gates   гейты в корне выпуска (там только сработавшие);
+//   closed  закрытые по календарю периоды книги: "first" — желтит первый,
+//           "lag" — только отставание больше чем на период (до отчёта за
+//           первый — справка, а не тревога).
+const CHIP_RULES = [
+  { schema: /^x5-/, flags: "*", price: true },
+  { schema: /^lenta-/, gates: ["book_update", "security_change", "limited_liability"], closed: "first" },
+  { schema: /^magnit-/, gates: ["book_update", "sigma_calibration"], closed: "first" },
+  { schema: /^/, flags: ["price_fallback", "report_fact", "book_update"], fired: ["manual_input_overdue"], closed: "lag" },
+];
+const GATE_TITLES = {
+  book_update: "Книгу пора обновить",
+  security_change: "Карточка акции сменилась после даты книги",
+  limited_liability: "Капитал близок к нулю: нужна смена метода",
+  sigma_calibration: "Пора перекалибровать σ активов",
+};
 const WORLD_TITLES = { N: "Нормализация", H: "Высокие ставки надолго", M: "Рыночный как есть" };
 const MAX_EVENTS = 40;
 const EVENT_HORIZON_DAYS = 400;
@@ -218,20 +242,37 @@ function pickMultiples(market, fv) {
 function pickHealth(d, meta) {
   const live = obj(d.live);
   const checks = obj(d.checks);
+  const rule = CHIP_RULES.find((r) => r.schema.test(String(d.schema || "")));
+  const raised = list(checks.flags).filter((f) => isObj(f) && f.raised);
   const notes = [];
-  const degraded = live.degraded_flag === true || live.degraded === true
-    || (Array.isArray(live.degraded) && live.degraded.length > 0)
-    || (isObj(live.errors) && Object.keys(live.errors).length > 0);
-  if (degraded) notes.push({ level: "warn", text: "Часть входов выпуска не свежая" });
-  for (const f of list(checks.flags)) {
-    if (!isObj(f) || !f.raised) continue;
-    const text = upperFirst(str(f.title) || str(f.name) || "флаг выпуска");
-    notes.push({ level: WARN_FLAGS.has(f.name) ? "warn" : "info", text: text + (str(f.detail) ? `: ${f.detail}` : "") });
+  const warn = (text) => notes.push({ level: "warn", text });
+
+  // Тревога живых входов — degraded_flag; список live.degraded несёт и нетревожные причины.
+  const degraded = typeof live.degraded_flag === "boolean" ? live.degraded_flag
+    : live.degraded === true || (Array.isArray(live.degraded) && live.degraded.length > 0)
+      || (isObj(live.errors) && Object.keys(live.errors).length > 0);
+  if (degraded) warn("Часть входов выпуска не свежая");
+  for (const f of raised) {
+    const text = upperFirst(str(f.title) || str(f.name) || "флаг выпуска") + (str(f.detail) ? `: ${f.detail}` : "");
+    notes.push({ level: rule.flags === "*" || list(rule.flags).includes(f.name) ? "warn" : "info", text });
+  }
+  if (rule.price && obj(d.market).price_status === "fallback" && !raised.some((f) => f.name === "price_fallback")) warn("Цена — последняя принятая");
+  for (const g of list(checks.gates)) {
+    if (isObj(g) && g.fired === true && list(rule.fired).includes(g.name)) warn(upperFirst(str(g.title) || g.name));
+  }
+  for (const g of list(d.gates)) {
+    if (isObj(g) && list(rule.gates).includes(g.key)) warn(GATE_TITLES[g.key] || `Гейт выпуска: ${g.key}`);
   }
   const broken = num(checks.invariants_broken);
-  if (isNum(broken) && broken > 0) notes.push({ level: "warn", text: `Нарушено инвариантов: ${broken}` });
-  if (meta.book_first_period_closed === true) {
-    notes.push({ level: "warn", text: "Первый прогнозный период книги закрыт по календарю, а факты и книга прежние" });
+  if (isNum(broken) && broken > 0) warn(`Нарушено инвариантов: ${broken}`);
+
+  const first = meta.book_first_period_closed === true;
+  const lag = isNum(meta.periods_closed) && meta.periods_closed > 1;
+  if (rule.closed === "lag" ? lag : rule.closed === "first" ? first : false) {
+    warn(lag ? "Книга отстала от календаря больше чем на период, а факты и книга прежние"
+      : "Первый прогнозный период книги закрыт по календарю, а факты и книга прежние");
+  } else if (first && !raised.some((f) => f.name === "report_fact")) {
+    notes.push({ level: "info", text: "Первый прогнозный период книги закрыт по календарю: до отчёта оценка считается на прежних фактах и прогнозе книги" });
   }
   return { warn: notes.some((n) => n.level === "warn"), notes: notes.slice(0, 8) };
 }

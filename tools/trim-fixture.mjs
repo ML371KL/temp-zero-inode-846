@@ -30,7 +30,14 @@ const out = {
   worlds: d.worlds && Object.fromEntries(Object.entries(d.worlds).map(([k, v]) => [k, v && typeof v === "object" && !Array.isArray(v) ? pick(v, ["title", "name"]) : v])),
   dividends: pick(d.dividends, ["next_expected", "yield_ltm", "dividends_from_year"]),
   calendar: d.calendar,
-  checks: pick(d.checks, ["flags", "invariants_broken"]),
+  checks: d.checks && {
+    ...pick(d.checks, ["flags", "invariants_broken"]),
+    // гейты с признаком fired (Т, Сбер): хабу нужны имя, заголовок и «сработал»
+    ...(Array.isArray(d.checks.gates) && d.checks.gates.some((g) => g && typeof g.fired === "boolean")
+      ? { gates: d.checks.gates.filter((g) => g && typeof g.fired === "boolean").map((g) => pick(g, ["name", "title", "fired"])) } : {}),
+  },
+  // гейты в корне выпуска (Магнит, Лента — там только сработавшие): хабу нужен ключ
+  gates: Array.isArray(d.gates) ? d.gates.map((g) => pick(g, ["key"])) : undefined,
   live: pick(d.live, ["degraded", "degraded_flag", "errors", "price_reference_date"]),
   next_report: pick(d.next_report, ["period", "closing", "events"]),
   valuation_history: d.valuation_history,

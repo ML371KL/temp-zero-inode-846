@@ -78,7 +78,8 @@ test("Сбербанк (sber-v1): две категории акций, реко
   assert.equal(c.dividend.yield, 0.155525);
   assert.equal(c.multiples.pb, 0.6973);
   assert.equal(c.cap, 6173.77);
-  assert.equal(c.health.warn, true, "первый период книги закрыт — жёлтый, как фишка выпуска на витрине Сбера");
+  assert.equal(c.health.warn, false, "первый квартал книги закрыт, отчёта ещё нет — справка, фишка на витрине Сбера зелёная");
+  assert.ok(c.health.notes.some((n) => n.level === "info" && /до отчёта/.test(n.text)));
   assert.ok(c.health.notes.some((n) => n.level === "info" && /объяснения/.test(n.text)));
   assert.equal(c.next_report.date, "2026-10-28", "ежемесячная РСБУ — мелкое событие, ближайший отчёт — МСФО");
 });
@@ -103,13 +104,53 @@ test("Т-Технологии (t-v1): объявленный дивиденд, �
   assert.equal(c.dividend.record_estimated, false);
   assert.equal(c.multiples.pb, 0.9008);
   assert.equal(c.cap, 722.89);
-  assert.equal(c.health.warn, true, "первый период книги закрыт — жёлтый, как фишка выпуска на витрине");
+  assert.equal(c.health.warn, false, "первый квартал книги закрыт, отчёта ещё нет — справка, фишка на витрине зелёная");
   const monthly = c.events.filter((e) => e.kind === "ops_release");
   assert.ok(monthly.length > 0 && monthly.every((e) => e.minor), "операционный релиз за месяц — мелкое событие, как РСБУ Сбера");
   assert.equal(c.next_report.kind, "ifrs", "ближайший отчёт — МСФО, а не месячный релиз");
   assert.equal(c.next_report.date, "2026-11-19");
   assert.equal(c.next_report.precision, "window");
   assert.equal(c.next_fact.date, "2026-11-19");
+});
+
+// Жёлтый выпуск в хабе — зеркало фишки выпуска на витрине модели (releaseChip в
+// её web/app.js); правила — CHIP_RULES в functions/_lib/summarize.js.
+test("свежесть: жёлтый — по правилу фишки на витрине самой модели", () => {
+  const health = (slug, patch) => {
+    const d = structuredClone(fixture(slug));
+    patch(d);
+    return summarize(registry.models.find((m) => m.slug === slug), d, { others, today: "2026-10-10" }).health;
+  };
+  const raise = (name) => (d) => { d.checks.flags.find((f) => f.name === name).raised = true; };
+  const warns = (h) => h.notes.filter((n) => n.level === "warn").map((n) => n.text);
+
+  // Т и Сбер (и новые модели по их образцу)
+  assert.equal(health("t", () => {}).warn, false);
+  assert.match(warns(health("t", (d) => { d.meta.periods_closed = 2; }))[0], /больше чем на период/);
+  const reported = health("t", raise("report_fact"));
+  assert.equal(reported.warn, true, "отчёт вышел, факт не внесён");
+  assert.ok(!reported.notes.some((n) => /до отчёта/.test(n.text)), "справки о закрытом квартале уже нет");
+  assert.equal(health("t", raise("book_update")).warn, true);
+  assert.equal(health("sber", raise("price_fallback")).warn, true);
+  assert.equal(health("t", raise("dividend_register")).warn, false, "на витрине Т это событие, фишка зелёная");
+  assert.equal(health("sber", raise("ras_mismatch")).warn, false);
+  assert.deepEqual(warns(health("t", (d) => { d.checks.gates = [{ name: "manual_input_overdue", title: "Ручной вход просрочен", fired: true }, { name: "guidance_gap", fired: true }]; })), ["Ручной вход просрочен"]);
+  assert.equal(health("t", (d) => { d.live.degraded = ["кривая вчерашняя"]; }).warn, false, "причина без тревоги: degraded_flag = false");
+  assert.equal(health("t", (d) => { d.live.degraded_flag = true; }).warn, true);
+
+  // Лента и Магнит: первый закрытый период и гейты книги в корне выпуска
+  assert.equal(health("lenta", () => {}).warn, false);
+  assert.equal(health("lenta", (d) => { d.meta.book_first_period_closed = true; d.meta.periods_closed = 1; }).warn, true);
+  assert.equal(health("lenta", (d) => { d.gates = [{ key: "guidance_gap" }, { key: "ev_ebitda" }]; }).warn, false);
+  assert.deepEqual(warns(health("lenta", (d) => { d.gates = [{ key: "security_change" }]; })), ["Карточка акции сменилась после даты книги"]);
+  assert.equal(health("magnit", (d) => { d.gates = [{ key: "limited_liability" }]; }).warn, false, "у Магнита такого правила нет");
+  assert.deepEqual(warns(health("magnit", (d) => { d.gates = [{ key: "sigma_calibration" }]; })), ["Пора перекалибровать σ активов"]);
+  assert.equal(health("magnit", (d) => { d.meta.book_first_period_closed = true; }).warn, true);
+
+  // X5: любой поднятый флаг и цена «последняя принятая»
+  assert.equal(health("x5", () => {}).warn, false);
+  assert.equal(health("x5", raise("dividend_register")).warn, true);
+  assert.deepEqual(warns(health("x5", (d) => { d.market.price_status = "fallback"; })), ["Цена — последняя принятая"]);
 });
 
 test("календарь: чужие отчёты приписаны своей компании, макро — без компании", () => {

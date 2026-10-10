@@ -1012,7 +1012,149 @@
     "detail": "Закрытие сделки по консолидации «Точки»: около 170 млн новых акций по 320 ₽, экономически — около 85 млн (3,2 %): эмитент ожидает закрытие в конце 2026 года; в оценку сделка войдёт фактами после закрытия, до тех пор — вне книги"
    }
   ],
-  "invariants_broken": 0
+  "invariants_broken": 0,
+  "gates": [
+   {
+    "name": "pb_by_world",
+    "title": "P/B клетки вне коридора мира",
+    "fired": false
+   },
+   {
+    "name": "roe_range",
+    "title": "ROE года вне коридора",
+    "fired": false
+   },
+   {
+    "name": "cor_range",
+    "title": "CoR года вне коридора",
+    "fired": false
+   },
+   {
+    "name": "nim_range",
+    "title": "ЧПМ квартала вне коридора",
+    "fired": false
+   },
+   {
+    "name": "nim_path_joint",
+    "title": "Ближний путь ЧПМ выше якоря и уровня после фазы роста",
+    "fired": true
+   },
+   {
+    "name": "cir_range",
+    "title": "C/I года вне коридора",
+    "fired": false
+   },
+   {
+    "name": "roe_k_homogeneity",
+    "title": "Разрыв «ROE − стоимость капитала» неоднороден по мирам",
+    "fired": false
+   },
+   {
+    "name": "guidance_gap",
+    "title": "Путь года вне гайденса",
+    "fired": true
+   },
+   {
+    "name": "capital_gap",
+    "title": "Капитальный разрыв: норматив ниже регуляторного пола",
+    "fired": false
+   },
+   {
+    "name": "k_gt_g",
+    "title": "Сработала защита «стоимость капитала больше роста»",
+    "fired": false
+   },
+   {
+    "name": "roe_gt_g",
+    "title": "ROE терминала не выше роста",
+    "fired": false
+   },
+   {
+    "name": "terminal_share",
+    "title": "Доля терминала вне коридора",
+    "fired": false
+   },
+   {
+    "name": "real_rate",
+    "title": "Реальная ставка терминала вне коридора",
+    "fired": false
+   },
+   {
+    "name": "bridge_drift",
+    "title": "Мост упр. ↔ МСФО дрейфует",
+    "fired": false
+   },
+   {
+    "name": "transmission_pairs",
+    "title": "Передача ставки между соседними мирами вне коридора",
+    "fired": false
+   },
+   {
+    "name": "lt_spread_floor",
+    "title": "Долгосрочный спред кредитной книги к опорной ставке ниже пола",
+    "fired": false
+   },
+   {
+    "name": "off_band_shift",
+    "title": "Оси вне полосы сдвигают заголовок",
+    "fired": false
+   },
+   {
+    "name": "m_crisis_vs_cbr",
+    "title": "Клетка «M × кризис» мягче рискового сценария ЦБ",
+    "fired": false
+   },
+   {
+    "name": "manual_input_overdue",
+    "title": "Ручной вход просрочен",
+    "fired": false
+   },
+   {
+    "name": "growth_cut",
+    "title": "Рост портфеля урезан капиталом сильнее коридора",
+    "fired": false
+   },
+   {
+    "name": "step_dividend",
+    "title": "У ступени минимума срезан дивиденд политики",
+    "fired": true
+   },
+   {
+    "name": "cir_lt",
+    "title": "C/I слоя «рыночные ставки как есть» на долгосрочном участке вне цели",
+    "fired": false
+   },
+   {
+    "name": "wholesale_share",
+    "title": "Доля оптового фондирования вне коридора",
+    "fired": false
+   },
+   {
+    "name": "payout_cap",
+    "title": "Выплата года по политике выше потолка",
+    "fired": true
+   },
+   {
+    "name": "volume_sign",
+    "title": "Снятие остановки кредита и поправок роста снижает оценку",
+    "fired": true
+   },
+   {
+    "name": "stress_sign",
+    "title": "Оценка растёт с убытком кризиса или прибыль — с требованием к капиталу",
+    "fired": false
+   },
+   {
+    "name": "window_backtest",
+    "title": "Уровни слоя «рыночные ставки как есть» после фазы роста вне окна фактов",
+    "fired": false
+   },
+   {
+    "name": "funds_cost_to_key",
+    "title": "Стоимость средств клиентов к ключевой ставке выше порога",
+    "fired": false
+   }
+  ]
  },
  "live": {
   "degraded": [],
