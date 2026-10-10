@@ -4,6 +4,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
 import { execFileSync } from "node:child_process";
+import { fileURLToPath } from "node:url";
 import { THEME_SCRIPT } from "../functions/_lib/pages.js";
 import { themeScriptHash, staticCsp } from "../functions/_lib/csp.js";
 import { normalizeRegistry } from "../functions/_lib/registry.js";
@@ -19,7 +20,7 @@ test("index.html несёт скрипт темы побайтно — инач�
 });
 
 test("клиент без синтаксических ошибок и без внешних адресов данных", () => {
-  execFileSync(process.execPath, ["--check", new URL("../web/app.js", import.meta.url).pathname]);
+  execFileSync(process.execPath, ["--check", fileURLToPath(new URL("../web/app.js", import.meta.url))]);
   const js = read("web/app.js");
   assert.match(js, /const API_REGISTRY = "\/api\/registry";/);
   assert.match(js, /const API_CARD = \(slug\) => `\/api\/card\//);
