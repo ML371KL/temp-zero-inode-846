@@ -1,6 +1,6 @@
-// Сводка выпусков пяти моделей семейства: что хаб читает из каждого контракта.
-// Фикстуры — урезанные настоящие выпуски 01.10.2026, у Т-Технологий — 09.10.2026
-// (tools/trim-fixture.mjs).
+// Сводка выпусков шести моделей семейства: что хаб читает из каждого контракта.
+// Фикстуры — урезанные настоящие выпуски 01.10.2026, у Т-Технологий — 09.10.2026,
+// у ВТБ — 15.10.2026 (tools/trim-fixture.mjs).
 
 import test from "node:test";
 import assert from "node:assert/strict";
@@ -111,6 +111,34 @@ test("Т-Технологии (t-v1): объявленный дивиденд, �
   assert.equal(c.next_report.date, "2026-11-19");
   assert.equal(c.next_report.precision, "window");
   assert.equal(c.next_fact.date, "2026-11-19");
+});
+
+test("ВТБ (vtb-v1): дивиденд по модели без даты реестра, месячные МСФО — мелкие", () => {
+  const c = summarize(registry.models.find((m) => m.slug === "vtb"), fixture("vtb"), { others, today: "2026-10-16" });
+  assert.equal(c.schema, "vtb-v1");
+  assert.equal(c.ticker, "VTBR");
+  assert.equal(c.fair.median, 61.52);
+  assert.equal(c.fair.printed_median, 62);
+  assert.deepEqual(c.fair.printed_band80, [39, 88]);
+  assert.deepEqual(c.fair.printed_band50, [48, 76]);
+  assert.equal(c.fair.printed_point, 64);
+  assert.equal(c.fair.p_below, 0.3685);
+  assert.equal(c.price.value, 54.67);
+  assert.ok(Math.abs(c.upside - (61.52 / 54.67 - 1)) < 1e-12);
+  assert.deepEqual(c.worlds.map((w) => [w.key, w.price]), [["N", 126.69], ["H", 83.31], ["M", 38.64]]);
+  assert.equal(c.brokers.median, 83);
+  assert.equal(c.brokers.n, 9);
+  assert.equal(c.dividend.dps, 6.5938);
+  assert.equal(c.dividend.status, "model");
+  assert.equal(c.dividend.record_date, null, "даты реестра в выпуске нет — null, а не выдуманная");
+  assert.equal(c.dividend.yield, 0.1206);
+  assert.equal(c.cap, 911.07);
+  assert.equal(c.health.warn, false, "правило фишки Т и Сбера: закрытый квартал до отчёта — справка");
+  const monthly = c.events.filter((e) => e.kind === "ifrs_monthly");
+  assert.ok(monthly.length > 0 && monthly.every((e) => e.minor), "МСФО за месяц — мелкое событие");
+  assert.equal(c.next_report.kind, "ifrs");
+  assert.equal(c.next_report.date, "2026-10-30");
+  assert.equal(c.next_fact.date, "2026-10-30");
 });
 
 // Жёлтый выпуск в хабе — зеркало фишки выпуска на витрине модели (releaseChip в

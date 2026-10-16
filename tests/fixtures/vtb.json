@@ -1,0 +1,836 @@
+{
+ "schema": "vtb-v1",
+ "meta": {
+  "generated_at": "2026-10-15T20:17:09+00:00",
+  "valuation_date": "2026-10-15",
+  "facts_date": "2026-06-30",
+  "book_version": "0.8",
+  "book_date": "2026-10-13",
+  "book_tag": "book-0.8",
+  "fast": false,
+  "payload_sha256": "bf189ce33c0e9cec0c657462ec97515d7d35d14ea967c526e3df6245acbf6a57",
+  "previous_sha256": "3c7f1e988ffbd1074610765a3f00f1858b17d517646156fa8eee31c0b7385f35",
+  "bytes": 413084,
+  "company": {
+   "name": "ВТБ",
+   "tickers": [
+    "VTBR"
+   ],
+   "main_ticker": "VTBR",
+   "share_classes": [
+    {
+     "ticker": "VTBR",
+     "class": "ordinary"
+    }
+   ],
+   "cbr_regnum": 1000,
+   "fiscal_year_end": "12-31"
+  },
+  "shares": {
+   "issued_mln": 12927.766,
+   "outstanding_mln": 12847.983,
+   "by_ticker": {
+    "VTBR": {
+     "issued_mln": 12927.766,
+     "treasury_mln": 79.784,
+     "outstanding_mln": 12847.983
+    }
+   },
+   "as_of": "2026-06-30",
+   "src": "отчётность МСФО и данные Московской биржи (факты книги)",
+   "divisor_mln": 16663.4,
+   "divisor_basis": "issued",
+   "divisor_label": "размещённые акции с поправкой на выпуск по 87 ₽",
+   "economic_treasury_mln": 0,
+   "corporate_actions": [
+    {
+     "date": "2023-03-30",
+     "kind": "issue",
+     "title": "Дополнительный выпуск по закрытой подписке (зарегистрирован отчёт об итогах 30.03.2023): 8 743 250 481 071 акция по 0,017085 ₽ — оплата акциями РНКБ и требованиями по субординированному депозиту ФНБ"
+    },
+    {
+     "date": "2023-06-08",
+     "kind": "issue",
+     "title": "Дополнительный выпуск по открытой подписке (SPO, отчёт об итогах 08.06.2023): 5 145 877 646 781 акция по 0,018225 ₽"
+    },
+    {
+     "date": "2024-07-11",
+     "kind": "split",
+     "title": "Консолидация обыкновенных акций 5000:1 (11.07.2024): 26 849 669 465 190 акций номиналом 0,01 ₽ → 5 369 933 893,038 акции номиналом 50 ₽",
+     "factor": 0.0002
+    },
+    {
+     "date": "2025-09-29",
+     "kind": "issue",
+     "title": "Дополнительный выпуск по открытой подписке (SPO): 1 250 484 389,5934 акции по 67 ₽, 83,8 млрд ₽; дата размещения последней бумаги 29.09.2025"
+    },
+    {
+     "date": "2026-04-29",
+     "kind": "issue",
+     "title": "Конвертация привилегированных акций первого и второго типа в 6 307 348 134 обыкновенные акции (29.04.2026), коэффициент по цене 82,67 ₽; денег не поступило"
+    },
+    {
+     "date": "2026-07-17",
+     "kind": "event",
+     "title": "Зарегистрирован дополнительный выпуск по открытой подписке: до 6 292 651 866 обыкновенных акций по 87 ₽ (до 547,5 млрд ₽); на 13.10.2026 не размещён"
+    }
+   ]
+  },
+  "basis_labels": {
+   "profit": "чистая прибыль, приходящаяся на акционеров банка (МСФО), до выплат по бессрочным инструментам",
+   "roe": "прибыль акционеров к капиталу обыкновенных акционеров МСФО (без бессрочных инструментов)",
+   "divisor": "размещённые акции с поправкой на выпуск по 87 ₽",
+   "dividend_issued": "на все размещённые акции",
+   "dividend_outstanding": "на акции в обращении"
+  },
+  "terms": {
+   "lt_level": "после фазы роста",
+   "profit_short": "прибыль акционеров",
+   "cir": "расходы к доходам",
+   "roe_lt": "ROE после фазы роста",
+   "noncore": "непрофильный результат (строка выключена)"
+  },
+  "period_unit": "quarter",
+  "input_unit": "month",
+  "anchor_period": "2026Q2",
+  "first_period": "2026Q3",
+  "last_period": "2036Q4",
+  "horizon": [
+   "2026Q3",
+   "2036Q4"
+  ],
+  "open_period": "2026Q4",
+  "periods_closed": 1,
+  "elapsed": 0.152174,
+  "book_first_period_closed": true,
+  "curve_as_of": "2026-09-18",
+  "basis": "ifrs",
+  "step": "quarter",
+  "day_count": "act365",
+  "governance_discount": 0,
+  "published_at": "2026-10-15T20:17:15+00:00"
+ },
+ "market": {
+  "price": 54.67,
+  "price_date": "2026-10-15",
+  "prices": {
+   "VTBR": {
+    "price": 54.67,
+    "date": "2026-10-15",
+    "time": "22:53",
+    "source": "T-Invest",
+    "status": "live",
+    "book_price": 56.11
+   }
+  },
+  "cap": 911.07,
+  "cap_by_ticker": {
+   "VTBR": 911.07
+  },
+  "multiples": {
+   "pb": 0.3561,
+   "pb_reported": 0.3793,
+   "pe_ltm": 2.1267,
+   "pe_fwd": 2.0759,
+   "dividend_yield_ltm": {
+    "VTBR": 0.35519
+   },
+   "dividend_yield_fwd": {
+    "VTBR": 0.1206
+   },
+   "bv_per_share": 153.55,
+   "basis": "ifrs"
+  },
+  "price_min": {
+   "VTBR": {
+    "date": "2026-09-17",
+    "close": 50.005
+   }
+  },
+  "price_max": {
+   "VTBR": {
+    "date": "2026-04-20",
+    "close": 97.65
+   }
+  },
+  "ex_dividend": [
+   {
+    "date": "2026-07-20",
+    "dps": 9.71,
+    "year": 2025,
+    "period": "2025Q4",
+    "label": "за 2025 год"
+   },
+   {
+    "date": "2026-07-20",
+    "dps": 9.71,
+    "year": 2025
+   }
+  ],
+  "brokers": {
+   "as_of": "2026-10-15",
+   "source": "T-Invest",
+   "n": 9,
+   "median": 83,
+   "min": 65,
+   "max": 125,
+   "recommendations": {
+    "buy": 5,
+    "hold": 4,
+    "sell": 0
+   },
+   "history": [
+    {
+     "date": "2026-10-14",
+     "median": 83,
+     "n": 9
+    },
+    {
+     "date": "2026-10-15",
+     "median": 83,
+     "n": 9
+    }
+   ]
+  }
+ },
+ "fair_value": {
+  "method": "judgement_median",
+  "low": 38.64,
+  "central": 64.1,
+  "high": 89.56,
+  "printed_low": 39,
+  "printed_central": 64,
+  "printed_high": 90,
+  "rates_view": {
+   "low": 38.64,
+   "high": 89.56,
+   "rub": 50.92
+  },
+  "by_world": {
+   "N": {
+    "price": 126.69,
+    "v0": 2111.01,
+    "bv_v": 2559.72,
+    "pb": 0.8247
+   },
+   "H": {
+    "price": 83.31,
+    "v0": 1388.29,
+    "bv_v": 2555.39,
+    "pb": 0.5433
+   },
+   "M": {
+    "price": 38.64,
+    "v0": 643.87,
+    "bv_v": 2559.57,
+    "pb": 0.2516
+   }
+  },
+  "headline": {
+   "median": 61.52,
+   "printed_median": 62,
+   "band80": [
+    38.59,
+    88.3
+   ],
+   "printed_band80": [
+    39,
+    88
+   ],
+   "band50": [
+    48.44,
+    75.95
+   ],
+   "printed_band50": [
+    48,
+    76
+   ],
+   "mean": 62.81,
+   "point": 64.1,
+   "printed_point": 64,
+   "market": 54.67,
+   "market_by_ticker": {
+    "VTBR": 54.67
+   },
+   "p_below_market": 0.3685,
+   "p_below_by_ticker": {
+    "VTBR": 0.3685
+   },
+   "market_percentile": 0.3685,
+   "upside": {
+    "VTBR": 0.125286
+   },
+   "draws": 2000,
+   "seed": 20261013,
+   "own_macro_confidence": 0.5,
+   "lambda_step": 0.05,
+   "print_step": 1,
+   "ceiling_x_market": 3
+  }
+ },
+ "worlds": {
+  "order": [
+   "N",
+   "H",
+   "M"
+  ],
+  "rows": {},
+  "source": {},
+  "overlay": {}
+ },
+ "dividends": {
+  "next_expected": {
+   "year": 2026,
+   "status": "model",
+   "dps": 6.5938,
+   "dps_policy": 6.5938,
+   "dps_mean": 5.5798,
+   "dps_p10": 0,
+   "dps_p90": 6.9913,
+   "p_cancel": 0.15,
+   "record_date": null,
+   "record_date_est": null,
+   "record_date_note": "оценки даты нет в календаре фактов",
+   "pay_date_est": null,
+   "yield": {
+    "VTBR": 0.1206
+   },
+   "condition": {
+    "metric": "n20_0",
+    "threshold": 0,
+    "n20_expected": 0.114717,
+    "p_limited": 0.06
+   }
+  },
+  "yield_ltm": {
+   "VTBR": 0.35519
+  }
+ },
+ "calendar": {
+  "today": "2026-10-15",
+  "next_fact": {
+   "id": "ifrs-2026Q3",
+   "date": "2026-10-30",
+   "title": "МСФО группы за 3-й квартал и девять месяцев 2026 года",
+   "kind": "ifrs",
+   "covers": "2026Q3",
+   "confirmed": true,
+   "precision": "day",
+   "days": 15
+  },
+  "next_ras": {
+   "month": "2026M10",
+   "release_date": "2026-11-27",
+   "release_confirmed": false,
+   "form102_date_est": null,
+   "form102_latest_est": null,
+   "enters_via": "release",
+   "date": "2026-11-27",
+   "days": 43
+  },
+  "events": [
+   {
+    "id": "regulation-2026-10-15",
+    "date": "2026-10-15",
+    "kind": "regulation",
+    "title": "Вступает в силу надбавка 250 % к коэффициентам риска по облигациям, обеспеченным потребительскими и автокредитами",
+    "confirmed": true,
+    "precision": "day",
+    "days": 0,
+    "note": "ВТБ — продавец секьюритизаций потребительских кредитов: цена «кредитного манёвра»"
+   },
+   {
+    "id": "cbr-2026-10-23",
+    "date": "2026-10-23",
+    "kind": "cbr_forecast",
+    "title": "Заседание Совета директоров Банка России по ключевой ставке (опорное: среднесрочный прогноз)",
+    "confirmed": true,
+    "precision": "day",
+    "days": 8,
+    "note": "решение в 13:30 по московскому времени; публикация прогноза — вход миров семейства"
+   },
+   {
+    "id": "ifrs-2026Q3",
+    "date": "2026-10-30",
+    "kind": "ifrs",
+    "title": "МСФО группы за 3-й квартал и девять месяцев 2026 года",
+    "confirmed": true,
+    "precision": "day",
+    "days": 15,
+    "covers": "2026Q3",
+    "note": "перезаякоривание на 30.09.2026; Н20.x на 01.10.2026 — в Databook и презентации"
+   },
+   {
+    "id": "spo-2026",
+    "date": "2026-10-31",
+    "kind": "deal",
+    "title": "Размещение дополнительных обыкновенных акций по открытой подписке: до 6 292 651 866 акций по 87 ₽ (до 547,5 млрд ₽); закрытие сделки с Wildberries & Russ",
+    "confirmed": false,
+    "precision": "window",
+    "days": 16,
+    "earliest": "2026-10-20",
+    "latest": "2026-11-30",
+    "note": "выпуск зарегистрирован 17.07.2026, на 13.10.2026 не размещён; срок «конец октября» — сообщение Интерфакса 29.09.2026; до размещения — вне числа акций",
+    "estimated": true,
+    "in_book": false
+   },
+   {
+    "id": "form805-2026Q3",
+    "date": "2026-11-26",
+    "kind": "form805",
+    "title": "Форма 0409805 банковской группы на 1 октября 2026 года на сайте Банка России: нормативы и капитал группы",
+    "confirmed": false,
+    "precision": "window",
+    "days": 42,
+    "covers": "2026Q3",
+    "earliest": "2026-11-10",
+    "latest": "2026-12-12",
+    "note": "срок для группы ВТБ отдельно не установлен; до формы — нормативы из отчётности и месячных книг банка",
+    "estimated": true
+   },
+   {
+    "id": "ifrs_monthly-2026M10",
+    "date": "2026-11-27",
+    "kind": "ifrs_monthly",
+    "title": "Результаты группы по МСФО за 10 месяцев 2026 года (месячная книга)",
+    "confirmed": false,
+    "precision": "window",
+    "days": 43,
+    "covers": "2026M10",
+    "earliest": "2026-11-25",
+    "latest": "2026-11-30",
+    "note": "оценка дня по прошлому году",
+    "estimated": true
+   },
+   {
+    "id": "cbr-2026-12-18",
+    "date": "2026-12-18",
+    "kind": "cbr_rate",
+    "title": "Заседание Совета директоров Банка России по ключевой ставке",
+    "confirmed": true,
+    "precision": "day",
+    "days": 64
+   },
+   {
+    "id": "ifrs_monthly-2026M11",
+    "date": "2026-12-25",
+    "kind": "ifrs_monthly",
+    "title": "Результаты группы по МСФО за 11 месяцев 2026 года (месячная книга)",
+    "confirmed": false,
+    "precision": "window",
+    "days": 71,
+    "covers": "2026M11",
+    "earliest": "2026-12-23",
+    "latest": "2026-12-30",
+    "note": "оценка дня по прошлому году",
+    "estimated": true
+   },
+   {
+    "id": "regulation-2027-01-01",
+    "date": "2027-01-01",
+    "kind": "regulation",
+    "title": "Надбавки к нормативам: поддержания капитала 1,5 %, за системную значимость 0,75 % — минимум Н20.0 10,75 %, Н20.1 7,25 %, Н20.2 8,75 %",
+    "confirmed": true,
+    "precision": "day",
+    "days": 78,
+    "note": "первая дата проверки — 01.04.2027"
+   },
+   {
+    "id": "cbr-2027-02-12",
+    "date": "2027-02-12",
+    "kind": "cbr_forecast",
+    "title": "Заседание Совета директоров Банка России по ключевой ставке (опорное: среднесрочный прогноз)",
+    "confirmed": true,
+    "precision": "day",
+    "days": 120
+   },
+   {
+    "id": "ifrs-2026Q4",
+    "date": "2027-02-25",
+    "kind": "ifrs",
+    "title": "МСФО группы за 2026 год; прогноз на 2027 год; возможно — стратегия 2027–2029 и новая дивидендная политика",
+    "confirmed": false,
+    "precision": "window",
+    "days": 133,
+    "covers": "2026Q4",
+    "earliest": "2027-02-24",
+    "latest": "2027-02-26",
+    "note": "оценка дня по прошлому году",
+    "estimated": true
+   },
+   {
+    "id": "form805-2026Q4",
+    "date": "2027-03-01",
+    "kind": "form805",
+    "title": "Форма 0409805 банковской группы на 1 января 2027 года",
+    "confirmed": false,
+    "precision": "window",
+    "days": 137,
+    "covers": "2026Q4",
+    "earliest": "2027-02-10",
+    "latest": "2027-04-30",
+    "note": "годовая форма выходит позже квартальных",
+    "estimated": true
+   },
+   {
+    "id": "cbr-2027-03-19",
+    "date": "2027-03-19",
+    "kind": "cbr_rate",
+    "title": "Заседание Совета директоров Банка России по ключевой ставке",
+    "confirmed": true,
+    "precision": "day",
+    "days": 155
+   },
+   {
+    "id": "regulation-2027-04-01",
+    "date": "2027-04-01",
+    "kind": "regulation",
+    "title": "Первая дата проверки надбавок 2,25 п.п. (минимум Н20.0 10,75 %)",
+    "confirmed": true,
+    "precision": "day",
+    "days": 168
+   },
+   {
+    "id": "ifrs-2027Q1",
+    "date": "2027-04-28",
+    "kind": "ifrs",
+    "title": "МСФО группы за 1-й квартал 2027 года",
+    "confirmed": false,
+    "precision": "window",
+    "days": 195,
+    "covers": "2027Q1",
+    "earliest": "2027-04-27",
+    "latest": "2027-04-30",
+    "note": "оценка дня по прошлому году",
+    "estimated": true
+   },
+   {
+    "id": "cbr-2027-04-30",
+    "date": "2027-04-30",
+    "kind": "cbr_forecast",
+    "title": "Заседание Совета директоров Банка России по ключевой ставке (опорное: среднесрочный прогноз)",
+    "confirmed": true,
+    "precision": "day",
+    "days": 197
+   },
+   {
+    "id": "dividend-recommendation-2026",
+    "date": "2027-05-25",
+    "kind": "dividend_decision",
+    "title": "Рекомендация наблюдательного совета по дивидендам за 2026 год",
+    "confirmed": false,
+    "precision": "window",
+    "days": 222,
+    "covers": "2026Q4",
+    "earliest": "2027-05-15",
+    "latest": "2027-05-31",
+    "note": "менеджмент 28.07.2026: выход на выплату 50 % по итогам 2026 года маловероятен",
+    "estimated": true
+   },
+   {
+    "id": "cbr-2027-06-11",
+    "date": "2027-06-11",
+    "kind": "cbr_rate",
+    "title": "Заседание Совета директоров Банка России по ключевой ставке",
+    "confirmed": true,
+    "precision": "day",
+    "days": 239
+   },
+   {
+    "id": "dividend-decision-2026",
+    "date": "2027-06-30",
+    "kind": "dividend_decision",
+    "title": "Годовое общее собрание акционеров: решение о дивидендах за 2026 год",
+    "confirmed": false,
+    "precision": "window",
+    "days": 258,
+    "covers": "2026Q4",
+    "earliest": "2027-06-20",
+    "latest": "2027-06-30",
+    "note": "реестр ≈ 20.07.2027, выплата — начало августа; вычет из норматива — в месяце выплаты",
+    "estimated": true
+   },
+   {
+    "id": "ifrs-2027Q2",
+    "date": "2027-07-28",
+    "kind": "ifrs",
+    "title": "МСФО группы за 2-й квартал и полугодие 2027 года",
+    "confirmed": false,
+    "precision": "window",
+    "days": 286,
+    "covers": "2027Q2",
+    "earliest": "2027-07-27",
+    "latest": "2027-07-30",
+    "note": "оценка дня по прошлому году",
+    "estimated": true
+   },
+   {
+    "id": "cbr-2027-07-30",
+    "date": "2027-07-30",
+    "kind": "cbr_forecast",
+    "title": "Заседание Совета директоров Банка России по ключевой ставке (опорное: среднесрочный прогноз)",
+    "confirmed": true,
+    "precision": "day",
+    "days": 288
+   },
+   {
+    "id": "cbr-2027-09-10",
+    "date": "2027-09-10",
+    "kind": "cbr_rate",
+    "title": "Заседание Совета директоров Банка России по ключевой ставке",
+    "confirmed": true,
+    "precision": "day",
+    "days": 330
+   }
+  ],
+  "recent": []
+ },
+ "checks": {
+  "flags": [
+   {
+    "name": "book_update",
+    "title": "Книгу пора обновить",
+    "raised": false,
+    "detail": null
+   },
+   {
+    "name": "report_fact",
+    "title": "Вышла МСФО, факт не внесён",
+    "raised": false,
+    "detail": null
+   },
+   {
+    "name": "dividend_register",
+    "title": "Срок решения о дивиденде прошёл, объявления нет в реестре",
+    "raised": false,
+    "detail": null
+   },
+   {
+    "name": "ni_jump",
+    "title": "Прибыль квартала г/г прыгает при неизменной ключевой",
+    "raised": true,
+    "detail": "H/norm/schedule, 2 кв. 2027: прибыль акционеров г/г 41 % при ключевой 14,62 % → 14,00 %"
+   },
+   {
+    "name": "dividend_recommended",
+    "title": "Совет директоров рекомендовал дивиденд",
+    "raised": false,
+    "detail": null
+   },
+   {
+    "name": "explanation_expiring",
+    "title": "Срок объяснения проверки истекает",
+    "raised": true,
+    "detail": "Путь года вне гайденса — объяснение действует до 30.10.2026"
+   },
+   {
+    "name": "policy_expired",
+    "title": "Срок дивидендной политики истёк: действует прежняя до новой",
+    "raised": false,
+    "detail": null
+   },
+   {
+    "name": "price_fallback",
+    "title": "Живая цена не принята",
+    "raised": false,
+    "detail": null
+   },
+   {
+    "name": "ras_mismatch",
+    "title": "Источники месячных результатов по МСФО разошлись",
+    "raised": false,
+    "detail": null
+   },
+   {
+    "name": "deal_pending",
+    "title": "Объявлена сделка, в книге её нет",
+    "raised": true,
+    "detail": "Размещение дополнительных обыкновенных акций по открытой подписке: до 6 292 651 866 акций по 87 ₽ (до 547,5 млрд ₽); закрытие сделки с Wildberries & Russ: выпуск зарегистрирован 17.07.2026, на 13.10.2026 не размещён; срок «конец октября» — сообщение Интерфакса 29.09.2026; до размещения — вне числа акций"
+   }
+  ],
+  "invariants_broken": 0,
+  "gates": [
+   {
+    "name": "pb_by_world",
+    "title": "P/B клетки вне коридора мира",
+    "fired": true
+   },
+   {
+    "name": "roe_range",
+    "title": "ROE года вне коридора",
+    "fired": true
+   },
+   {
+    "name": "cor_range",
+    "title": "CoR года вне коридора",
+    "fired": false
+   },
+   {
+    "name": "nim_range",
+    "title": "ЧПМ квартала вне коридора",
+    "fired": false
+   },
+   {
+    "name": "nim_path_joint",
+    "title": "Ближний путь ЧПМ выше якоря и уровня после фазы роста",
+    "fired": false
+   },
+   {
+    "name": "cir_range",
+    "title": "расходы к доходам года вне коридора",
+    "fired": false
+   },
+   {
+    "name": "roe_k_homogeneity",
+    "title": "Разрыв «ROE − стоимость капитала» неоднороден по мирам",
+    "fired": false
+   },
+   {
+    "name": "guidance_gap",
+    "title": "Путь года вне гайденса",
+    "fired": true
+   },
+   {
+    "name": "capital_gap",
+    "title": "Капитальный разрыв: норматив ниже регуляторного пола",
+    "fired": false
+   },
+   {
+    "name": "k_gt_g",
+    "title": "Сработала защита «стоимость капитала больше роста»",
+    "fired": false
+   },
+   {
+    "name": "roe_gt_g",
+    "title": "ROE терминала не выше роста",
+    "fired": false
+   },
+   {
+    "name": "terminal_share",
+    "title": "Доля терминала вне коридора",
+    "fired": true
+   },
+   {
+    "name": "real_rate",
+    "title": "Реальная ставка терминала вне коридора",
+    "fired": false
+   },
+   {
+    "name": "bridge_drift",
+    "title": "Мост упр. ↔ МСФО дрейфует",
+    "fired": false
+   },
+   {
+    "name": "transmission_pairs",
+    "title": "Передача ставки между соседними мирами вне коридора",
+    "fired": false
+   },
+   {
+    "name": "lt_spread_floor",
+    "title": "Долгосрочный спред кредитной книги к опорной ставке ниже пола",
+    "fired": false
+   },
+   {
+    "name": "off_band_shift",
+    "title": "Оси вне полосы сдвигают заголовок",
+    "fired": false
+   },
+   {
+    "name": "m_crisis_vs_cbr",
+    "title": "Клетка «M × кризис» мягче рискового сценария ЦБ",
+    "fired": false
+   },
+   {
+    "name": "manual_input_overdue",
+    "title": "Ручной вход просрочен",
+    "fired": false
+   },
+   {
+    "name": "cir_lt",
+    "title": "C/I слоя «рыночные ставки как есть» на долгосрочном участке вне цели",
+    "fired": true
+   },
+   {
+    "name": "wholesale_share",
+    "title": "Доля оптового фондирования вне коридора",
+    "fired": false
+   },
+   {
+    "name": "volume_sign",
+    "title": "Снятие остановки кредита и поправок роста снижает оценку",
+    "fired": true
+   },
+   {
+    "name": "stress_sign",
+    "title": "Оценка растёт с убытком кризиса или прибыль — с требованием к капиталу",
+    "fired": true
+   },
+   {
+    "name": "window_backtest",
+    "title": "Уровни слоя «рыночные ставки как есть» после фазы роста вне окна фактов",
+    "fired": false
+   },
+   {
+    "name": "funds_cost_to_key",
+    "title": "Стоимость средств клиентов к ключевой ставке выше порога",
+    "fired": false
+   }
+  ]
+ },
+ "live": {
+  "degraded": [],
+  "degraded_flag": false
+ },
+ "next_report": {
+  "period": "2026Q3",
+  "closing": {
+   "id": "ifrs-2026Q3",
+   "date": "2026-10-30",
+   "title": "МСФО группы за 3-й квартал и девять месяцев 2026 года",
+   "confirmed": true,
+   "precision": "day",
+   "earliest": null,
+   "latest": null,
+   "published": false
+  }
+ },
+ "valuation_history": {
+  "date": [
+   "2026-10-15"
+  ],
+  "sha": [
+   "3c7f1e988ffb"
+  ],
+  "median": [
+   61.5
+  ],
+  "p10": [
+   38.59
+  ],
+  "p25": [
+   48.42
+  ],
+  "p75": [
+   75.91
+  ],
+  "p90": [
+   88.3
+  ],
+  "point": [
+   64.07
+  ],
+  "price": {
+   "VTBR": [
+    55.02
+   ]
+  },
+  "rollbacks": [],
+  "book_changes": [],
+  "rule": "день — последняя строка дня (МСК); старше 180 дней — недели; старше двух лет — месяца; не больше 400 строк",
+  "source": "журнал опубликованных выпусков (репозиторий данных)"
+ },
+ "book": {
+  "version": "0.8",
+  "date": "2026-10-13"
+ }
+}

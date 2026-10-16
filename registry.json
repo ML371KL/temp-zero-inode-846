@@ -69,6 +69,22 @@
       ],
       "status": "live",
       "added": "2026-10-10"
+    },
+    {
+      "slug": "vtb",
+      "name": "ВТБ",
+      "tickers": ["VTBR"],
+      "sector": "Банки",
+      "mark": "ВТБ",
+      "color": "#002882",
+      "url": "https://tzi-850-vtb.pages.dev",
+      "aliases": ["ВТБ", "Банк ВТБ"],
+      "data": [
+        "https://ml371kl.github.io/temp-zero-inode-850-vtb-data/latest.json",
+        "https://raw.githubusercontent.com/ML371KL/temp-zero-inode-850-vtb-data/release/latest.json"
+      ],
+      "status": "live",
+      "added": "2026-10-16"
     }
   ]
 }
