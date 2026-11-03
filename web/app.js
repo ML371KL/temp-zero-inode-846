@@ -117,7 +117,7 @@ const fmt = {
     return `${fmt.num(v, digits)}${NBSP}₽`;
   },
   rub(v, digits = 0) { return isNum(v) ? `${fmt.num(v, digits)}${NBSP}₽` : "—"; },
-  signedRub(v) { return isNum(v) ? `${v > 0 ? "+" : v < 0 ? "−" : ""}${fmt.num(Math.abs(v), 0)}${NBSP}₽` : "—"; },
+  signedRub(v, digits = 0) { return isNum(v) ? `${v > 0 ? "+" : v < 0 ? "−" : ""}${fmt.num(Math.abs(v), digits)}${NBSP}₽` : "—"; },
   pct(v, digits = 0) { return isNum(v) ? `${fmt.num(v * 100, digits)}${NBSP}%` : "—"; },
   signedPct(v, digits = 0) {
     if (!isNum(v)) return "—";
@@ -129,6 +129,12 @@ const fmt = {
   bn(v) {
     if (!isNum(v)) return "—";
     return v >= 1000 ? `${fmt.num(v / 1000, 2)}${NBSP}трлн${NBSP}₽` : `${fmt.num(v, v < 100 ? 1 : 0)}${NBSP}млрд${NBSP}₽`;
+  },
+  // Число печати модели: знаков столько же, сколько у её шага (0,1 → 14,8; 5 → 315).
+  printed(v, step) {
+    if (!isNum(v)) return "—";
+    if (!isNum(step) || step <= 0) return fmt.price(v);
+    return `${fmt.num(v, step >= 1 ? 0 : Math.min(2, Math.ceil(-Math.log10(step) - 1e-9)))}${NBSP}₽`;
   },
   range(pair, f = fmt.price) {
     if (!Array.isArray(pair)) return "—";
@@ -379,6 +385,20 @@ function responsive(draw, cls) {
 /* ── плитка компании: знак и цвет из реестра (mark, color, ink); хаб рисует её
    сам, без запросов к витринам. Нет цвета — нейтральная плитка. ── */
 
+// Медиана и полосы — числами печати модели с её шагом; нет печати — как есть.
+function fairPrint(f) {
+  return isNum(f.printed_median) ? fmt.printed(f.printed_median, f.print_step) : fmt.price(f.median);
+}
+
+function bandPrint(f, w) {
+  const printed = f[`printed_band${w}`];
+  return printed ? fmt.range(printed, (v) => fmt.printed(v, f.print_step)) : fmt.range(f[`band${w}`]);
+}
+
+function bandEnd(f, i) {
+  return f.printed_band80 ? fmt.printed(f.printed_band80[i], f.print_step).replace(`${NBSP}₽`, "") : fmt.price(f.band80[i]).replace(`${NBSP}₽`, "");
+}
+
 function coIcon(entry) {
   const mark = entry.mark || (list(entry.tickers)[0] || entry.name || "?").slice(0, 2).toUpperCase();
   const box = el("span", { class: "co-icon", "aria-hidden": "true", "data-len": [...mark].length }, mark);
@@ -516,9 +536,9 @@ function strip(card, dom) {
   attachTip(node, () => ({
     title: `${card.name}: модель против рынка`,
     rows: [
-      ["медиана", `${fmt.price(f.printed_median ?? f.median)} · ${fmt.signedPct(rel(f.median))}`],
-      ["полоса 50 %", `${fmt.range(f.printed_band50 || f.band50)}`],
-      ["полоса 80 %", `${fmt.range(f.printed_band80 || f.band80)}`],
+      ["медиана", `${fairPrint(f)} · ${fmt.signedPct(rel(f.median))}`],
+      ["полоса 50 %", `${bandPrint(f, 50)}`],
+      ["полоса 80 %", `${bandPrint(f, 80)}`],
       ["рынок", `${fmt.price(px)} · ${fmt.dayMonth(obj(card.price).date)}`],
     ],
     note: isNum(f.p_below) ? `Вероятность, что справедливая цена ниже рынка, — ${fmt.pct(f.p_below)}` : null,
@@ -738,8 +758,8 @@ function appendRow(tbody, r, dom) {
 
   const tr = el("tr", { class: "row", tabindex: "0", "aria-expanded": String(open), "data-slug": entry.slug }, co,
     el("td", { class: "r num c-price" }, fmt.price(price.value), el("span", { class: "cell-sub" }, fmt.dayMonth(price.date))),
-    el("td", { class: "r num c-fair" }, el("span", { class: "fair" }, el("span", { class: "approx" }, "≈"), fmt.price(f.printed_median ?? f.median)),
-      el("span", { class: "cell-sub" }, isNum(f.median) ? `точно ${fmt.num(f.median, f.median < 1000 ? 1 : 0)}` : "")),
+    el("td", { class: "r num c-fair" }, el("span", { class: "fair" }, el("span", { class: "approx" }, "≈"), fairPrint(f)),
+      el("span", { class: "cell-sub" }, isNum(f.median) ? `точно ${fmt.num(f.median, f.median < 100 ? 2 : f.median < 1000 ? 1 : 0)}` : "")),
     el("td", { class: "r c-up" }, upsidePill(card.upside)),
     el("td", { class: "strip-cell" }, strip(card, dom)),
     el("td", { class: "r num col-p" }, isNum(f.p_below)
@@ -924,17 +944,17 @@ function valuationPanel(card) {
   const f = obj(card.fair);
   const px = obj(card.price).value;
   const panel = el("div", { class: "panel" }, el("h4", {}, "Оценка модели"),
-    el("div", { class: "big-fair" }, el("span", { class: "approx", style: { fontSize: "22px" } }, "≈"), el("span", { class: "v" }, fmt.num(f.printed_median ?? f.median, (f.printed_median ?? f.median) < 1000 && !Number.isInteger(f.printed_median ?? f.median) ? 2 : 0)), el("span", { class: "u" }, "₽")),
+    el("div", { class: "big-fair" }, el("span", { class: "approx", style: { fontSize: "22px" } }, "≈"), el("span", { class: "v" }, fairPrint(f).replace(`${NBSP}₽`, "")), el("span", { class: "u" }, "₽")),
     el("p", { class: "small muted" }, `медиана по суждениям книги · точно ${fmt.rub(f.median, f.median < 1000 ? 2 : 0)}${isNum(f.draws) ? ` · ${fmt.num(f.draws)} прогонов` : ""}`),
     distChart(f, px));
   const dl = el("dl", { class: "kv" });
   const kv = (k, v) => dl.append(el("dt", {}, k), el("dd", {}, v));
-  kv("Полоса 50 %", fmt.range(f.printed_band50 || f.band50));
-  kv("Полоса 80 %", fmt.range(f.printed_band80 || f.band80));
-  if (isNum(f.point)) kv("Точка при центральных значениях", fmt.price(f.printed_point ?? f.point));
-  if (isNum(f.mean)) kv("Среднее прогонов", fmt.rub(f.mean));
+  kv("Полоса 50 %", bandPrint(f, 50));
+  kv("Полоса 80 %", bandPrint(f, 80));
+  if (isNum(f.point)) kv("Точка при центральных значениях", (isNum(f.printed_point) ? fmt.printed(f.printed_point, f.print_step) : fmt.price(f.point)));
+  if (isNum(f.mean)) kv("Среднее прогонов", fmt.price(f.mean));
   if (isNum(f.p_below)) kv("P(справедливая < рынка)", fmt.pct(f.p_below));
-  if (isNum(f.rates_view_rub)) kv("Вклад своего взгляда на ставки", fmt.signedRub(f.rates_view_rub));
+  if (isNum(f.rates_view_rub)) kv("Вклад своего взгляда на ставки", fmt.signedRub(f.rates_view_rub, Math.abs(f.median) < 100 ? 2 : 0));
   for (const o of list(card.others)) kv(`К ${o.ticker} (${fmt.price(o.value)})`, `${fmt.signedPct(o.upside)}${isNum(o.p_below) ? ` · P ${fmt.pct(o.p_below)}` : ""}`);
   const worlds = list(card.worlds);
   if (worlds.length) {
@@ -961,8 +981,8 @@ function distChart(f, px) {
     el("i", { class: "md", style: { left: `${x(f.median)}%` } }),
     isNum(f.point) ? el("i", { class: "pt", style: { left: `${x(f.point)}%` } }) : null,
     isNum(px) ? label("lab mk-lab", x(px), `рынок ${fmt.price(px)}`, 16) : null,
-    label("lab end", x(f.band80[0]), fmt.num(f.printed_band80 ? f.printed_band80[0] : f.band80[0]), 8),
-    label("lab end", x(f.band80[1]), fmt.num(f.printed_band80 ? f.printed_band80[1] : f.band80[1]), 8));
+    label("lab end", x(f.band80[0]), bandEnd(f, 0), 8),
+    label("lab end", x(f.band80[1]), bandEnd(f, 1), 8));
   return node;
 }
 
@@ -1142,8 +1162,8 @@ function scatter(items, W) {
     const hit = svgEl("circle", { class: "hit", cx, cy, r: Math.max(rad + 6, 14), tabindex: "0", role: "link", "aria-label": `${p.r.entry.name}: потенциал ${fmt.signedPct(p.x)}, ширина полосы ${fmt.pct(p.y)}` });
     attachTip(hit, {
       title: `${p.r.entry.name} · ${p.r.entry.sector}`,
-      rows: [["потенциал", fmt.signedPct(p.x)], ["медиана · рынок", `${fmt.price(f.printed_median ?? f.median)} · ${fmt.price(p.r.card.price.value)}`],
-        ["полоса 80 %", fmt.range(f.printed_band80 || f.band80)], ["ширина полосы", fmt.pct(p.y)], ["P(ниже рынка)", fmt.pct(f.p_below)], ["капитализация", fmt.bn(p.r.card.cap)]],
+      rows: [["потенциал", fmt.signedPct(p.x)], ["медиана · рынок", `${fairPrint(f)} · ${fmt.price(p.r.card.price.value)}`],
+        ["полоса 80 %", bandPrint(f, 80)], ["ширина полосы", fmt.pct(p.y)], ["P(ниже рынка)", fmt.pct(f.p_below)], ["капитализация", fmt.bn(p.r.card.cap)]],
       note: "Клик — строка модели в обзоре",
     });
     const go = () => { state.expanded.add(p.r.entry.slug); location.hash = `#overview/${p.r.entry.slug}`; };
@@ -1295,7 +1315,7 @@ function modelCard(r) {
       el("div", { class: "mcard-title" }, el("b", {}, entry.name), el("span", { class: "co-meta" }, el("span", { class: "tick" }, list(entry.tickers).join(" · ")), ` · ${entry.sector}`)),
       el("span", { class: "state" }, el("span", { class: "dot", "data-state": fr.state }), stateWord(fr.state))));
   if (r.ok) {
-    node.append(el("div", { class: "mcard-fig" }, el("span", { class: "v" }, `≈${NBSP}${fmt.price(f.printed_median ?? f.median)}`), upsidePill(card.upside), el("span", { class: "muted small" }, `рынок ${fmt.price(obj(card.price).value)}`)));
+    node.append(el("div", { class: "mcard-fig" }, el("span", { class: "v" }, `≈${NBSP}${fairPrint(f)}`), upsidePill(card.upside), el("span", { class: "muted small" }, `рынок ${fmt.price(obj(card.price).value)}`)));
     const dl = el("dl", { class: "kv" });
     const kv = (k, v) => dl.append(el("dt", {}, k), el("dd", {}, v));
     kv("Выпуск", fmt.stamp(rel.published_at));

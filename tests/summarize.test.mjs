@@ -1,6 +1,6 @@
-// Сводка выпусков шести моделей семейства: что хаб читает из каждого контракта.
+// Сводка выпусков семи моделей семейства: что хаб читает из каждого контракта.
 // Фикстуры — урезанные настоящие выпуски 01.10.2026, у Т-Технологий — 09.10.2026,
-// у ВТБ — 15.10.2026 (tools/trim-fixture.mjs).
+// у ВТБ — 15.10.2026, у Совкомбанка — 02.11.2026 (tools/trim-fixture.mjs).
 
 import test from "node:test";
 import assert from "node:assert/strict";
@@ -139,6 +139,28 @@ test("ВТБ (vtb-v1): дивиденд по модели без даты рее
   assert.equal(c.next_report.kind, "ifrs");
   assert.equal(c.next_report.date, "2026-10-30");
   assert.equal(c.next_fact.date, "2026-10-30");
+});
+
+test("Совкомбанк (svcb-v1): цена меньше 100 ₽, шаг печати 0,1, формы банка — мелкие", () => {
+  const c = summarize(registry.models.find((m) => m.slug === "svcb"), fixture("svcb"), { others, today: "2026-11-04" });
+  assert.equal(c.schema, "svcb-v1");
+  assert.equal(c.ticker, "SVCB");
+  assert.equal(c.fair.median, 14.84);
+  assert.equal(c.fair.printed_median, 14.8);
+  assert.deepEqual(c.fair.printed_band80, [11.3, 19]);
+  assert.deepEqual(c.fair.printed_band50, [12.8, 17]);
+  assert.equal(c.fair.print_step, 0.1);
+  assert.equal(c.fair.p_below, 0.064);
+  assert.equal(c.price.value, 10.54);
+  assert.equal(c.brokers.median, 16.5);
+  assert.equal(c.brokers.n, 12);
+  assert.equal(c.dividend.dps, 0.2975);
+  assert.equal(c.dividend.record_estimated, true);
+  assert.equal(c.cap, 236.42);
+  assert.equal(c.health.warn, false, "правило фишки Т и Сбера: закрытый квартал до отчёта — справка");
+  assert.ok(c.events.filter((e) => e.kind === "ras").every((e) => e.minor));
+  assert.equal(c.next_report.kind, "ifrs");
+  assert.equal(c.next_report.date, "2026-11-13");
 });
 
 // Жёлтый выпуск в хабе — зеркало фишки выпуска на витрине модели (releaseChip в

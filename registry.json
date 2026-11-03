@@ -85,6 +85,23 @@
       ],
       "status": "live",
       "added": "2026-10-16"
+    },
+    {
+      "slug": "svcb",
+      "name": "Совкомбанк",
+      "tickers": ["SVCB"],
+      "sector": "Банки",
+      "mark": "СК",
+      "color": "#ffffff",
+      "ink": "#0b3d91",
+      "url": "https://tzi-850-svcb.pages.dev",
+      "aliases": ["Совкомбанк", "Совкомбанка"],
+      "data": [
+        "https://ml371kl.github.io/temp-zero-inode-850-svcb-data/latest.json",
+        "https://raw.githubusercontent.com/ML371KL/temp-zero-inode-850-svcb-data/release/latest.json"
+      ],
+      "status": "live",
+      "added": "2026-11-04"
     }
   ]
 }
