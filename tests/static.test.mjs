@@ -48,11 +48,15 @@ test("реестр: валиден, slug уникальны, у живых — h
   for (const m of reg.models.filter((x) => x.status === "live")) assert.match(m.url, /^https:\/\/[^/]+$/);
 });
 
-test("реестр семейства: у каждой модели есть репозиторий, ветка и вид", () => {
+test("реестр семейства: у каждой модели есть репозиторий, ветка, вид, сервер, сторож; private — булево", () => {
   for (const m of JSON.parse(read("registry.json")).models) {
     assert.match(m.repo || "", /^[A-Za-z0-9._-]+$/, `${m.slug}: repo`);
     assert.match(m.branch || "", /^[A-Za-z0-9._\/-]+$/, `${m.slug}: branch`);
     assert.ok(["bank", "retail", "projection"].includes(m.kind), `${m.slug}: kind ${m.kind}`);
+    // server и watch обязательны: строка или null (undefined не проходит — test(undefined) ловил бы строку "undefined")
+    assert.ok(m.server === null || (typeof m.server === "string" && /^[a-z0-9]+$/.test(m.server)), `${m.slug}: server`);
+    assert.ok(m.watch === null || (typeof m.watch === "string" && /^[0-9a-z]+$/.test(m.watch)), `${m.slug}: watch`);
+    assert.ok(m.private === undefined || typeof m.private === "boolean", `${m.slug}: private`);
   }
 });
 
