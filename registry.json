@@ -138,6 +138,25 @@
       "server": "svcb850",
       "kind": "bank",
       "watch": "850svcb"
+    },
+    {
+      "slug": "yandex",
+      "name": "Яндекс",
+      "tickers": ["YDEX"],
+      "sector": "Технологии",
+      "mark": "Я",
+      "color": "#fc3f1d",
+      "ink": "#ffffff",
+      "url": "https://tzi-850-yandex.pages.dev",
+      "aliases": ["Яндекс", "Yandex"],
+      "data": ["https://raw.githubusercontent.com/ML371KL/temp-zero-inode-850-yandex-data/release/latest.json"],
+      "status": "live",
+      "repo": "temp-zero-inode-850-yandex",
+      "branch": "main",
+      "private": false,
+      "server": "yandex850",
+      "kind": "projection",
+      "watch": "850yandex"
     }
   ]
 }
