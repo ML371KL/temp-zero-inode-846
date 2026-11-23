@@ -9,6 +9,12 @@
  * пути в соответствующий `pick…`. Поле, которого в выпуске нет, остаётся null —
  * «не раскрыто», а не ноль (правило семейства null ≠ 0).
  *
+ * Шапка выпуска семейства (`header`, схема family-header-v1, общий слой — первым
+ * её несёт Яндекс): если она есть, число, полоса, рынок, книга, статус, следующий
+ * отчёт и сроки берутся из неё, а чего в шапке нет (средняя, напечатанные края
+ * полосы, брокеры, календарь) — по прежним путям. Выпуск без шапки читается ровно
+ * как раньше; карточка выпуска с шапкой несёт ещё `deadlines`, `health.level`.
+ *
  * Карточка — около 3–6 КБ против 140–420 КБ выпуска: хаб не таскает в
  * браузер распределения и сетки, только то, что показывает.
  */
@@ -60,13 +66,16 @@ export function summarize(entry, d, options = {}) {
     : list(company.tickers).length ? list(company.tickers) : company.ticker ? [company.ticker] : [];
   const ticker = tickers[0] || company.main_ticker || null;
   const today = options.today || mskToday();
+  const hd = pickHeader(d);
+  const hr = obj(hd.release);
+  const hb = obj(hd.book);
 
-  const fair = pickFair(d, fv);
-  const price = pickPrice(d, market, fair, ticker);
+  const fair = pickFair(d, fv, hd);
+  const price = pickPrice(d, market, fair, ticker, hd);
   const upside = isNum(fair.median) && isNum(price.value) && price.value > 0 ? fair.median / price.value - 1 : null;
 
   const events = pickEvents(d, entry, options.others || [], today);
-  const nextFact = pickNextFact(d, entry, today);
+  const nextFact = headerNextFact(hd, entry, today) ?? pickNextFact(d, entry, today);
 
   return {
     v: CARD_VERSION,
@@ -79,16 +88,16 @@ export function summarize(entry, d, options = {}) {
     ok: true,
     schema: str(d.schema),
     release: {
-      published_at: str(meta.published_at) || str(meta.generated_at),
-      generated_at: str(meta.generated_at),
-      valuation_date: str(meta.valuation_date),
-      facts_date: str(meta.facts_date),
-      book_version: str(meta.book_version) || str(obj(d.book).version),
-      book_date: str(meta.book_date) || str(obj(d.book).date),
+      published_at: str(meta.published_at) || str(hr.generated_at) || str(meta.generated_at),
+      generated_at: str(hr.generated_at) || str(meta.generated_at),
+      valuation_date: str(hr.valuation_date) || str(meta.valuation_date),
+      facts_date: str(obj(hd.facts).facts_date) || str(meta.facts_date),
+      book_version: str(hb.version) || str(meta.book_version) || str(obj(d.book).version),
+      book_date: str(hb.date) || str(meta.book_date) || str(obj(d.book).date),
       sha: str(meta.payload_sha256) ? meta.payload_sha256.slice(0, 12) : null,
       bytes: num(meta.bytes),
     },
-    health: pickHealth(d, meta),
+    health: headerHealth(hd) ?? pickHealth(d, meta),
     price,
     others: pickOtherClasses(d, market, fair, tickers.slice(1)),
     fair,
@@ -103,41 +112,93 @@ export function summarize(entry, d, options = {}) {
     next_report: pickNextReport(events, nextFact, entry.slug, today),
     events,
     screens: list(options.screens),
+    ...(hd.schema ? { deadlines: pickDeadlines(hd) } : {}),
   };
+}
+
+/* ── шапка выпуска ── */
+
+const HEADER_SCHEMA = "family-header-v1";
+const STATUS_LEVELS = ["green", "yellow", "red"];
+const DEADLINE_KINDS = ["explanation", "book", "data", "policy"];
+
+/** Шапка выпуска, если она есть и её схема знакома хабу; иначе {} — читаются прежние поля. */
+function pickHeader(d) {
+  const h = obj(d.header);
+  return h.schema === HEADER_SCHEMA ? h : {};
+}
+
+// Состояние — правило общего слоя (status.level шапки): red и yellow желтят строку,
+// причины — предупреждения; поднятые флаги уровня info — справки. Битый статус — прежнее правило.
+function headerHealth(hd) {
+  const st = obj(hd.status);
+  if (!hd.schema || !STATUS_LEVELS.includes(st.level)) return null;
+  const notes = [];
+  for (const r of list(st.reasons)) {
+    if (str(r)) notes.push({ level: st.level === "green" ? "info" : "warn", text: upperFirst(str(r)) });
+  }
+  for (const f of list(hd.flags)) {
+    if (isObj(f) && f.level === "info") notes.push({ level: "info", text: upperFirst(str(f.title) || str(f.name) || "флаг выпуска") });
+  }
+  return { warn: st.level !== "green", level: st.level, notes: notes.slice(0, 8) };
+}
+
+// Отчёт, которого ждёт модель: report.next шапки (закрывающий отчёт следующего периода).
+function headerNextFact(hd, entry, today) {
+  const next = obj(obj(hd.report).next);
+  if (!hd.schema || !str(next.title)) return null;
+  const nf = normalizeEvent({ ...next, kind: "report" });
+  if (!nf || nf.date < addDays(today, -1)) return null;
+  return { ...nf, cls: "report", minor: false, company: entry.slug };
+}
+
+// Сроки, после которых сборка откажет или модель устареет: ближний первым.
+function pickDeadlines(hd) {
+  return list(hd.deadlines)
+    .filter((x) => isObj(x) && isoDate(x.date) && str(x.what))
+    .map((x) => ({
+      date: isoDate(x.date),
+      kind: DEADLINE_KINDS.includes(x.kind) ? x.kind : null,
+      what: str(x.what).slice(0, 400),
+      action: str(x.action) ? str(x.action).slice(0, 300) : null,
+    }))
+    .sort((a, b) => (a.date < b.date ? -1 : a.date > b.date ? 1 : 0))
+    .slice(0, 12);
 }
 
 /* ── оценка ── */
 
-function pickFair(d, fv) {
+function pickFair(d, fv, hd) {
   const h = obj(fv.headline);
   const x = obj(d.headline);
   const printed = obj(fv.printed);
+  const s = obj(hd.headline);
   return {
-    median: num(h.median) ?? num(x.central),
-    printed_median: num(h.printed_median) ?? num(x.printed_central),
+    median: num(s.median) ?? num(h.median) ?? num(x.central),
+    printed_median: num(s.printed) ?? num(h.printed_median) ?? num(x.printed_central),
     mean: num(h.mean) ?? num(x.mean),
-    point: num(h.point) ?? (isObj(d.headline) ? num(fv.central) : null),
+    point: num(s.point) ?? num(h.point) ?? (isObj(d.headline) ? num(fv.central) : null),
     printed_point: num(h.printed_point) ?? num(printed.central) ?? num(fv.printed_central),
-    band80: pair(h.band80) ?? pair(x.band),
-    band50: pair(h.band50) ?? pair(x.inner),
+    band80: pair(s.band80) ?? pair(h.band80) ?? pair(x.band),
+    band50: pair(s.band50) ?? pair(h.band50) ?? pair(x.inner),
     printed_band80: pair(h.printed_band80) ?? pair(x.printed_band),
     printed_band50: pair(h.printed_band50) ?? pair(x.printed_inner),
-    print_step: num(h.print_step) ?? num(x.print_step),
-    p_below: num(h.p_below_market) ?? num(x.p_central_below_market),
-    market: num(h.market) ?? num(x.market_price),
+    print_step: num(s.print_step) ?? num(h.print_step) ?? num(x.print_step),
+    p_below: num(s.p_below_market) ?? num(h.p_below_market) ?? num(x.p_central_below_market),
+    market: num(obj(hd.market).price) ?? num(h.market) ?? num(x.market_price),
     draws: num(h.draws) ?? num(x.draws),
     rates_view_rub: num(obj(fv.rates_view).rub),
   };
 }
 
-function pickPrice(d, market, fair, ticker) {
+function pickPrice(d, market, fair, ticker, hd) {
   const byTicker = ticker ? obj(obj(market.prices)[ticker]) : {};
   const live = obj(d.live);
   const value = fair.market ?? num(byTicker.price) ?? num(market.price);
   return {
     value,
     ticker,
-    date: str(byTicker.date) || str(market.price_date) || str(live.price_reference_date) || str(obj(d.meta).valuation_date),
+    date: str(obj(hd.market).price_date) || str(byTicker.date) || str(market.price_date) || str(live.price_reference_date) || str(obj(d.meta).valuation_date),
     time: str(byTicker.time) || str(market.price_time),
     status: str(byTicker.status) || str(market.price_status),
     source: str(byTicker.source) || str(market.price_source),

@@ -1,0 +1,601 @@
+{
+ "schema": "yandex-v1",
+ "header": {
+  "schema": "family-header-v1",
+  "model": {
+   "slug": "yandex",
+   "tickers": [
+    "YDEX"
+   ],
+   "name": "Яндекс"
+  },
+  "headline": {
+   "printed": 3000,
+   "median": 3009.9,
+   "point": 3204.26,
+   "band80": [
+    2049.19,
+    3829.45
+   ],
+   "band50": [
+    2526.01,
+    3421.44
+   ],
+   "print_step": 50,
+   "p_below_market": 0.6625
+  },
+  "market": {
+   "ticker": "YDEX",
+   "price": 3277.5,
+   "price_date": "2026-11-20",
+   "upside": -0.0846681922
+  },
+  "book": {
+   "version": "1.4",
+   "date": "2026-11-23",
+   "tag": "book-1.4"
+  },
+  "facts": {
+   "anchor_period": "2026H1",
+   "facts_date": "2026-06-30",
+   "first_period": "2026H2",
+   "open_period": "2026H2",
+   "periods_closed": [],
+   "first_period_closed": false
+  },
+  "worlds": {
+   "version": "1.7",
+   "record_asof": "2026-10-28",
+   "record_sha256": "1e905cb77c1d3a81cc89d6b80769171a60c0169d103340d3e7314bd8030d6f00",
+   "engine_sha256": "fd9aa160472bb0f04ecdc9529166f04758e3a01f578450ee2c4e577a5d0ebc8f"
+  },
+  "common": {
+   "version": "1.1.0",
+   "manifest_sha256": "6d143513054e1ef96e1fb362dab63ad05414a34f81c1eba52e290558f23d1112"
+  },
+  "release": {
+   "generated_at": "2026-11-23T17:17:53Z",
+   "valuation_date": "2026-11-20",
+   "engine_commit": "640198909ded077191ad031d6d24e075e1b306a9",
+   "fast": true
+  },
+  "flags": [],
+  "gates": [],
+  "deadlines": [
+   {
+    "date": "2027-02-17",
+    "kind": "data",
+    "what": "закрывающий отчёт за 2026H2 — Финансовые результаты за 4 кв. и 2026 г. с отчётностью, 2027-02-17 (окно 2027-02-17 – 2027-02-20, estimate): после него факты якоря 2026H1 устарели",
+    "action": "принять отчёт: python -m common.cli report --period 2026H2"
+   },
+   {
+    "date": "2027-04-30",
+    "kind": "explanation",
+    "what": "объяснение гейта «Капитал клетки > 0 и запас V0/D слоя» (equity_cushion) действует до этой даты; гейт не сработал: если сработает после срока, сборка откажет",
+    "action": "продлить объяснение в data/assumptions/gate_explanations.yaml с числами действующей книги или убрать причину срабатывания"
+   }
+  ],
+  "report": {
+   "state": "current",
+   "next": {
+    "date": "2027-02-17",
+    "title": "Финансовые результаты за 4 кв. и 2026 г. с отчётностью",
+    "covers": "2026H2",
+    "precision": "estimate",
+    "confirmed": false
+   },
+   "last_fact_period": "2026H1",
+   "out_since": null
+  },
+  "status": {
+   "level": "green",
+   "reasons": []
+  }
+ },
+ "meta": {
+  "generated_at": "2026-11-23T17:17:53Z",
+  "valuation_date": "2026-11-20",
+  "facts_date": "2026-06-30",
+  "book_version": "1.4",
+  "book_date": "2026-11-23",
+  "basis": "скорр. EBITDA компании (после аренды офисов)",
+  "shares_mln": 398.298711,
+  "shares_outstanding_mln": 380.885255,
+  "governance_discount": 0.03,
+  "anchor_period": "2026H1",
+  "first_period": "2026H2",
+  "last_period": "2036H2",
+  "open_period": "2026H2",
+  "curve_as_of": "2026-10-28",
+  "closed_periods": 0,
+  "elapsed": 0.77173913,
+  "worlds_version": "1.7",
+  "fast": true,
+  "draws": 400,
+  "payload_sha256": "50f0811f7752fdde780fef24954d284bc49f383fe39ba32c40d4ef868edf8aa1",
+  "bytes": 99936,
+  "previous_sha256": null
+ },
+ "market": {
+  "price": 3277.5,
+  "price_date": "2026-11-20",
+  "price_time": null,
+  "price_source": "книга (meta.market_price)",
+  "price_status": "book",
+  "book_price": 3277.5,
+  "shares_outstanding_mln": 380.885255,
+  "market_cap": 1248.35142,
+  "claims": 218.503659,
+  "market_ev": 1564.30162,
+  "equity_share_of_ev": 0.860318716,
+  "ebitda_2027": 395.989257,
+  "ev_ebitda_2027": 3.95036379,
+  "brokers": null,
+  "price_min": null,
+  "price_max": null
+ },
+ "fair_value": {
+  "low": 3094.21,
+  "central": 3204.26,
+  "high": 3314.31,
+  "printed": {
+   "low": 3100,
+   "central": 3200,
+   "high": 3300
+  },
+  "rates_view": {
+   "rub": 220.099386
+  },
+  "by_world": {
+   "N": 3866.98798,
+   "H": 2982.27366,
+   "M": 3094.21194
+  }
+ },
+ "headline": {
+  "central": 3009.9,
+  "printed_central": 3000,
+  "band": [
+   2049.19,
+   3829.45
+  ],
+  "printed_band": [
+   2050,
+   3850
+  ],
+  "inner": [
+   2526.01,
+   3421.44
+  ],
+  "printed_inner": [
+   2550,
+   3400
+  ],
+  "mean": 2962.46,
+  "p_central_below_market": 0.6625,
+  "market_price": 3277.5,
+  "print_step": 50,
+  "draws": 400,
+  "lambda": 0.5
+ },
+ "worlds": {
+  "order": [
+   "N",
+   "H",
+   "M"
+  ],
+  "source": {},
+  "N": {
+   "name": "Нормализация"
+  },
+  "H": {
+   "name": "Высокие ставки надолго"
+  },
+  "M": {
+   "name": "Рыночный как есть"
+  }
+ },
+ "dividends": {
+  "next_expected": null,
+  "yield_ltm": null
+ },
+ "calendar": {
+  "events": [
+   {
+    "id": "yandex.report.2026H2",
+    "kind": "report",
+    "date": "2027-02-17",
+    "precision": "estimate",
+    "earliest": "2027-02-17",
+    "latest": "2027-02-20",
+    "confirmed": false,
+    "covers": "2026H2",
+    "gives": [
+     "revenue",
+     "ebitda",
+     "guidance",
+     "balance"
+    ],
+    "title": "Финансовые результаты за 4 кв. и 2026 г. с отчётностью",
+    "src": "оценка по прошлым датам компании: 4К24 — 20.02.2025, 4К25 — 17.02.2026 (src/ir_financial-releases_2024.html, src/ir_financial-releases_2025.html); на 22.11.2026 дата не объявлена (src/ir_events.html, out/facts-deals-market.md)",
+    "note": "дата — прошлогодняя, окно — даты двух прошлых лет"
+   },
+   {
+    "id": "yandex.agm.2026",
+    "kind": "agm",
+    "date": "2027-04-14",
+    "precision": "estimate",
+    "earliest": "2027-04-14",
+    "latest": "2027-04-15",
+    "confirmed": false,
+    "covers": "2026",
+    "gives": [
+     "dividend"
+    ],
+    "title": "Годовое общее собрание акционеров по итогам 2026 г.",
+    "src": "оценка по прошлым датам компании: ГОСА 15.04.2025, 14.04.2026 (src/ydex_agm_2025-04-15_voting_results.pdf, src/ydex_agm_2026-04-14_voting_results.pdf); не объявлено (out/facts-deals-market.md)",
+    "note": "дата — прошлогодняя, окно — даты двух прошлых лет"
+   },
+   {
+    "id": "yandex.dividend.2026",
+    "kind": "dividend",
+    "date": "2027-04-27",
+    "precision": "estimate",
+    "earliest": "2027-04-27",
+    "latest": "2027-04-28",
+    "confirmed": false,
+    "covers": "2026",
+    "gives": [
+     "dividend"
+    ],
+    "title": "Отсечка: дивиденд по результатам 2026 г.",
+    "src": "оценка по прошлым отсечкам компании: 28.04.2025, 27.04.2026 (out/facts-capital.md; src/ir_dividends.html); не объявлено (out/facts-deals-market.md)",
+    "note": "решение и размер не объявлены; дата — прошлогодняя, окно — даты двух прошлых лет"
+   },
+   {
+    "id": "yandex.operating.2027Q1",
+    "kind": "operating",
+    "date": "2027-04-28",
+    "precision": "estimate",
+    "earliest": "2027-04-25",
+    "latest": "2027-04-28",
+    "confirmed": false,
+    "covers": "2027Q1",
+    "gives": [
+     "revenue",
+     "ebitda"
+    ],
+    "title": "Финансовые результаты за 1 кв. 2027 г.",
+    "src": "оценка по прошлым датам компании: 1К25 — 25.04.2025, 1К26 — 28.04.2026 (src/ir_financial-releases_2025.html, src/ir_events.html)",
+    "note": "дата — прошлогодняя, окно — даты двух прошлых лет"
+   },
+   {
+    "id": "yandex.report.2027H1",
+    "kind": "report",
+    "date": "2027-07-29",
+    "precision": "estimate",
+    "earliest": "2027-07-29",
+    "latest": "2027-07-29",
+    "confirmed": false,
+    "covers": "2027H1",
+    "gives": [
+     "revenue",
+     "ebitda",
+     "balance"
+    ],
+    "title": "Финансовые результаты за 2 кв. и 1П 2027 г. с отчётностью",
+    "src": "оценка по прошлым датам компании: 2К25 — 29.07.2025, 2К26 — 29.07.2026 (src/ir_financial-releases_2025.html, src/ir_events.html)",
+    "note": "дата — прошлогодняя, окно — даты двух прошлых лет"
+   },
+   {
+    "id": "yandex.agm.2027H1",
+    "kind": "agm",
+    "date": "2027-09-09",
+    "precision": "estimate",
+    "earliest": "2027-09-09",
+    "latest": "2027-09-09",
+    "confirmed": false,
+    "covers": "2027H1",
+    "gives": [
+     "dividend"
+    ],
+    "title": "Внеочередное собрание акционеров: дивиденд за 1П 2027 г.",
+    "src": "оценка по прошлым датам компании: ВОСА 09.09.2025, 09.09.2026 (src/ydex_egm_2025-09-09_voting_results.pdf, src/ydex_egm_2026-09-09_voting_results.pdf)",
+    "note": "решение не объявлено; дата — прошлогодняя"
+   },
+   {
+    "id": "yandex.dividend.2027H1",
+    "kind": "dividend",
+    "date": "2027-09-21",
+    "precision": "estimate",
+    "earliest": "2027-09-21",
+    "latest": "2027-09-29",
+    "confirmed": false,
+    "covers": "2027H1",
+    "gives": [
+     "dividend"
+    ],
+    "title": "Отсечка: дивиденд за 1П 2027 г.",
+    "src": "оценка по прошлым отсечкам компании: 29.09.2025, 21.09.2026 (out/facts-capital.md)",
+    "note": "решение и размер не объявлены; дата — прошлогодняя, окно — даты двух прошлых лет"
+   },
+   {
+    "id": "yandex.operating.2027Q3",
+    "kind": "operating",
+    "date": "2027-10-29",
+    "precision": "estimate",
+    "earliest": "2027-10-29",
+    "latest": "2027-10-29",
+    "confirmed": false,
+    "covers": "2027Q3",
+    "gives": [
+     "revenue",
+     "ebitda"
+    ],
+    "title": "Финансовые результаты за 3 кв. 2027 г.",
+    "src": "оценка по прошлым датам компании: 3К25 — 29.10.2025, 3К26 — 29.10.2026 (src/ir_financial-releases_2025.html, src/ir_events.html)",
+    "note": "дата — прошлогодняя"
+   }
+  ]
+ },
+ "checks": {
+  "flags": [
+   {
+    "name": "book_update",
+    "title": "Книгу пора обновить",
+    "raised": false,
+    "status": "not_connected",
+    "detail": "порогов `checks.book_update` (сдвиг кривой, возраст книги) в книге нет — флаг не считается"
+   },
+   {
+    "name": "dividend_register",
+    "title": "Отсечка прошла, дивиденда в реестре нет",
+    "raised": false,
+    "status": "not_connected",
+    "detail": "ожидаемых отсечек в календаре нет (календарь — задача плана 15)"
+   },
+   {
+    "name": "report_fact",
+    "title": "Отчёт вышел, факт не внесён",
+    "raised": false,
+    "status": "ok",
+    "detail": "отчёт за 2П 2026 по календарю — 2027-02-17"
+   },
+   {
+    "name": "price_fallback",
+    "title": "Цена — запасная",
+    "raised": false,
+    "status": "ok",
+    "detail": "цена рынка: цена книги"
+   },
+   {
+    "name": "stale_release",
+    "title": "Выпуск устарел",
+    "raised": false,
+    "status": "not_connected",
+    "detail": "считают хаб и сторож свежести по дате выпуска"
+   }
+  ],
+  "gates": [
+   {
+    "name": "ebitda_2026",
+    "title": "EBITDA группы первого прогнозного года в коридоре устава",
+    "fired": false
+   },
+   {
+    "name": "tax_rate_2026_27",
+    "title": "Налог первых двух прогнозных лет (за вычетом щита) к EBIT − I",
+    "fired": false
+   },
+   {
+    "name": "broker_ebitda_2027",
+    "title": "EBITDA второго года (веса заголовка) против брокеров",
+    "fired": false
+   },
+   {
+    "name": "roic_increment",
+    "title": "Отдача прироста капитала против отдачи окна (база без оборотного капитала)",
+    "fired": false
+   },
+   {
+    "name": "terminal_reinvest",
+    "title": "Вложения терминала: капвложения − амортизация ≥ g × (ОС + НМА)",
+    "fired": false
+   },
+   {
+    "name": "ev_ebitda_2027",
+    "title": "EV/EBITDA второго года точки",
+    "fired": false
+   },
+   {
+    "name": "terminal_share",
+    "title": "Доля PV терминала в EV клетки",
+    "fired": false
+   },
+   {
+    "name": "terminal_share_point",
+    "title": "Доля PV терминала точки",
+    "fired": false
+   },
+   {
+    "name": "margin_range",
+    "title": "Маржа группы полугодия",
+    "fired": false
+   },
+   {
+    "name": "capex_range",
+    "title": "Капвложения к выручке года",
+    "fired": false
+   },
+   {
+    "name": "real_rate",
+    "title": "Реальная ставка терминала мира",
+    "fired": false
+   },
+   {
+    "name": "equity_cushion",
+    "title": "Капитал клетки > 0 и запас V0/D слоя",
+    "fired": false
+   },
+   {
+    "name": "flow_9m26",
+    "title": "Поток без банка 9 мес. против изменения чистого долга без банка",
+    "fired": false
+   }
+  ]
+ },
+ "live": {
+  "degraded": false,
+  "errors": {}
+ },
+ "next_report": {
+  "period": "2026H2",
+  "closing": {
+   "date": "2027-02-17",
+   "title": "Финансовые результаты за 4 кв. и 2026 г. с отчётностью",
+   "confirmed": false,
+   "published": false
+  },
+  "events": [
+   {
+    "id": "yandex.report.2026H2",
+    "kind": "report",
+    "date": "2027-02-17",
+    "precision": "estimate",
+    "earliest": "2027-02-17",
+    "latest": "2027-02-20",
+    "confirmed": false,
+    "covers": "2026H2",
+    "gives": [
+     "revenue",
+     "ebitda",
+     "guidance",
+     "balance"
+    ],
+    "title": "Финансовые результаты за 4 кв. и 2026 г. с отчётностью",
+    "src": "оценка по прошлым датам компании: 4К24 — 20.02.2025, 4К25 — 17.02.2026 (src/ir_financial-releases_2024.html, src/ir_financial-releases_2025.html); на 22.11.2026 дата не объявлена (src/ir_events.html, out/facts-deals-market.md)",
+    "note": "дата — прошлогодняя, окно — даты двух прошлых лет"
+   },
+   {
+    "id": "yandex.agm.2026",
+    "kind": "agm",
+    "date": "2027-04-14",
+    "precision": "estimate",
+    "earliest": "2027-04-14",
+    "latest": "2027-04-15",
+    "confirmed": false,
+    "covers": "2026",
+    "gives": [
+     "dividend"
+    ],
+    "title": "Годовое общее собрание акционеров по итогам 2026 г.",
+    "src": "оценка по прошлым датам компании: ГОСА 15.04.2025, 14.04.2026 (src/ydex_agm_2025-04-15_voting_results.pdf, src/ydex_agm_2026-04-14_voting_results.pdf); не объявлено (out/facts-deals-market.md)",
+    "note": "дата — прошлогодняя, окно — даты двух прошлых лет"
+   },
+   {
+    "id": "yandex.dividend.2026",
+    "kind": "dividend",
+    "date": "2027-04-27",
+    "precision": "estimate",
+    "earliest": "2027-04-27",
+    "latest": "2027-04-28",
+    "confirmed": false,
+    "covers": "2026",
+    "gives": [
+     "dividend"
+    ],
+    "title": "Отсечка: дивиденд по результатам 2026 г.",
+    "src": "оценка по прошлым отсечкам компании: 28.04.2025, 27.04.2026 (out/facts-capital.md; src/ir_dividends.html); не объявлено (out/facts-deals-market.md)",
+    "note": "решение и размер не объявлены; дата — прошлогодняя, окно — даты двух прошлых лет"
+   },
+   {
+    "id": "yandex.operating.2027Q1",
+    "kind": "operating",
+    "date": "2027-04-28",
+    "precision": "estimate",
+    "earliest": "2027-04-25",
+    "latest": "2027-04-28",
+    "confirmed": false,
+    "covers": "2027Q1",
+    "gives": [
+     "revenue",
+     "ebitda"
+    ],
+    "title": "Финансовые результаты за 1 кв. 2027 г.",
+    "src": "оценка по прошлым датам компании: 1К25 — 25.04.2025, 1К26 — 28.04.2026 (src/ir_financial-releases_2025.html, src/ir_events.html)",
+    "note": "дата — прошлогодняя, окно — даты двух прошлых лет"
+   },
+   {
+    "id": "yandex.report.2027H1",
+    "kind": "report",
+    "date": "2027-07-29",
+    "precision": "estimate",
+    "earliest": "2027-07-29",
+    "latest": "2027-07-29",
+    "confirmed": false,
+    "covers": "2027H1",
+    "gives": [
+     "revenue",
+     "ebitda",
+     "balance"
+    ],
+    "title": "Финансовые результаты за 2 кв. и 1П 2027 г. с отчётностью",
+    "src": "оценка по прошлым датам компании: 2К25 — 29.07.2025, 2К26 — 29.07.2026 (src/ir_financial-releases_2025.html, src/ir_events.html)",
+    "note": "дата — прошлогодняя, окно — даты двух прошлых лет"
+   },
+   {
+    "id": "yandex.agm.2027H1",
+    "kind": "agm",
+    "date": "2027-09-09",
+    "precision": "estimate",
+    "earliest": "2027-09-09",
+    "latest": "2027-09-09",
+    "confirmed": false,
+    "covers": "2027H1",
+    "gives": [
+     "dividend"
+    ],
+    "title": "Внеочередное собрание акционеров: дивиденд за 1П 2027 г.",
+    "src": "оценка по прошлым датам компании: ВОСА 09.09.2025, 09.09.2026 (src/ydex_egm_2025-09-09_voting_results.pdf, src/ydex_egm_2026-09-09_voting_results.pdf)",
+    "note": "решение не объявлено; дата — прошлогодняя"
+   },
+   {
+    "id": "yandex.dividend.2027H1",
+    "kind": "dividend",
+    "date": "2027-09-21",
+    "precision": "estimate",
+    "earliest": "2027-09-21",
+    "latest": "2027-09-29",
+    "confirmed": false,
+    "covers": "2027H1",
+    "gives": [
+     "dividend"
+    ],
+    "title": "Отсечка: дивиденд за 1П 2027 г.",
+    "src": "оценка по прошлым отсечкам компании: 29.09.2025, 21.09.2026 (out/facts-capital.md)",
+    "note": "решение и размер не объявлены; дата — прошлогодняя, окно — даты двух прошлых лет"
+   },
+   {
+    "id": "yandex.operating.2027Q3",
+    "kind": "operating",
+    "date": "2027-10-29",
+    "precision": "estimate",
+    "earliest": "2027-10-29",
+    "latest": "2027-10-29",
+    "confirmed": false,
+    "covers": "2027Q3",
+    "gives": [
+     "revenue",
+     "ebitda"
+    ],
+    "title": "Финансовые результаты за 3 кв. 2027 г.",
+    "src": "оценка по прошлым датам компании: 3К25 — 29.10.2025, 3К26 — 29.10.2026 (src/ir_financial-releases_2025.html, src/ir_events.html)",
+    "note": "дата — прошлогодняя"
+   }
+  ]
+ },
+ "book": {
+  "version": "1.4",
+  "date": "2026-11-23"
+ }
+}

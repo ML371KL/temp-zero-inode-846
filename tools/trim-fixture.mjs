@@ -20,6 +20,8 @@ const drop = (o, keys) => (o && typeof o === "object" ? Object.fromEntries(Objec
 const fv = d.fair_value || {};
 const out = {
   schema: d.schema,
+  // шапка семейства (family-header-v1) — целиком: она мала, хаб читает её первой
+  header: d.header,
   meta: drop(d.meta, ["engine_commit"]),
   market: drop(d.market, ["price_history", "peers", "peers_same_base"]),
   fair_value: {

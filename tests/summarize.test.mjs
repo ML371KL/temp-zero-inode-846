@@ -1,6 +1,7 @@
 // Сводка выпусков семи моделей семейства: что хаб читает из каждого контракта.
 // Фикстуры — урезанные настоящие выпуски 01.10.2026, у Т-Технологий — 09.10.2026,
-// у ВТБ — 15.10.2026, у Совкомбанка — 02.11.2026 (tools/trim-fixture.mjs).
+// у ВТБ — 15.10.2026, у Совкомбанка — 02.11.2026, у Яндекса — быстрый выпуск-кандидат
+// 23.11.2026 с шапкой family-header-v1 (tools/trim-fixture.mjs).
 
 import test from "node:test";
 import assert from "node:assert/strict";
@@ -162,6 +163,87 @@ test("Совкомбанк (svcb-v1): цена меньше 100 ₽, шаг пе
   assert.equal(c.next_report.kind, "ifrs");
   assert.equal(c.next_report.date, "2026-11-13");
 });
+
+// Шапка выпуска семейства (header, family-header-v1): число, полоса, рынок, книга,
+// статус, следующий отчёт и сроки — из неё; без шапки — прежние поля.
+test("Яндекс (yandex-v1 с шапкой family-header-v1): число, полоса, рынок, книга, статус, отчёт, сроки — из шапки", () => {
+  const entry = registry.models.find((m) => m.slug === "yandex");
+  const sum = (d) => summarize(entry, d, { others, today: "2026-11-24" });
+  const c = sum(fixture("yandex"));
+  assert.equal(c.schema, "yandex-v1");
+  assert.equal(c.fair.median, 3009.9);
+  assert.equal(c.fair.printed_median, 3000);
+  assert.equal(c.fair.point, 3204.26);
+  assert.deepEqual(c.fair.band80, [2049.19, 3829.45]);
+  assert.deepEqual(c.fair.band50, [2526.01, 3421.44]);
+  assert.equal(c.fair.print_step, 50);
+  assert.equal(c.fair.p_below, 0.6625);
+  assert.equal(c.price.value, 3277.5);
+  assert.equal(c.price.date, "2026-11-20");
+  assert.equal(c.release.book_version, "1.4");
+  assert.equal(c.release.book_date, "2026-11-23");
+  assert.equal(c.release.valuation_date, "2026-11-20");
+  assert.deepEqual(c.health, { warn: false, level: "green", notes: [] });
+  assert.equal(c.next_fact.date, "2027-02-17");
+  assert.equal(c.next_fact.kind, "report");
+  assert.equal(c.next_fact.precision, "estimate");
+  assert.equal(c.next_report.date, "2027-02-17");
+  assert.deepEqual(c.deadlines.map((x) => [x.date, x.kind]), [["2027-02-17", "data"], ["2027-04-30", "explanation"]]);
+  // чего в шапке нет — по прежним путям образца X5
+  assert.deepEqual(c.fair.printed_band80, [2050, 3850]);
+  assert.equal(c.fair.mean, 2962.46);
+  assert.deepEqual(c.worlds.map((w) => w.key), ["N", "H", "M"]);
+
+  // шапка — первая: прежние поля другие или их нет, а карточка та же
+  const legacyGone = structuredClone(fixture("yandex"));
+  delete legacyGone.headline;
+  legacyGone.meta = { payload_sha256: legacyGone.meta.payload_sha256 };
+  legacyGone.next_report = {};
+  const g = sum(legacyGone);
+  for (const k of ["median", "printed_median", "point", "band80", "band50", "print_step", "p_below", "market"]) {
+    assert.deepEqual(g.fair[k], c.fair[k], `fair.${k} из шапки`);
+  }
+  assert.equal(g.price.date, "2026-11-20");
+  assert.deepEqual(
+    [g.release.book_version, g.release.book_date, g.release.valuation_date, g.release.facts_date, g.release.generated_at],
+    [c.release.book_version, c.release.book_date, c.release.valuation_date, c.release.facts_date, c.release.generated_at]);
+  assert.deepEqual(g.next_fact, c.next_fact);
+
+  // статус и причины — правило слоя из шапки, флаг info — справка
+  const yellow = structuredClone(fixture("yandex"));
+  yellow.header.status = { level: "yellow", reasons: ["срок объяснения через 12 дн."] };
+  yellow.header.flags = [{ name: "price_fallback", level: "info", title: "цена — книжная" }];
+  const y = sum(yellow).health;
+  assert.equal(y.warn, true);
+  assert.equal(y.level, "yellow");
+  assert.deepEqual(y.notes, [{ level: "warn", text: "Срок объяснения через 12 дн." }, { level: "info", text: "Цена — книжная" }]);
+
+  // незнакомая схема шапки — как выпуск без шапки
+  const foreign = structuredClone(fixture("yandex"));
+  foreign.header.schema = "family-header-v2";
+  foreign.header.headline.median = 1;
+  const f = sum(foreign);
+  assert.equal(f.fair.median, 3009.9);
+  assert.equal(f.deadlines, undefined);
+  assert.equal(f.health.level, undefined);
+});
+
+test("сосед без шапки (X5): прежние поля, карточка без deadlines и health.level", () => {
+  const d = fixture("x5");
+  assert.equal(d.header, undefined, "у фикстуры X5 шапки нет");
+  const c = card("x5");
+  assert.equal(c.fair.median, 3148.43);
+  assert.equal(c.fair.point, 3242.28);
+  assert.equal(c.release.book_version, str(d.meta.book_version));
+  assert.equal("deadlines" in c, false);
+  assert.equal("level" in c.health, false);
+  // чужой блок header без схемы семейства не читается
+  const odd = structuredClone(d);
+  odd.header = { headline: { median: 1 }, status: { level: "red", reasons: ["x"] } };
+  assert.deepEqual(summarize(registry.models.find((m) => m.slug === "x5"), odd, { others, today: "2026-10-02" }), c);
+});
+
+const str = (v) => (typeof v === "string" && v.trim() ? v.trim() : null);
 
 // Жёлтый выпуск в хабе — зеркало фишки выпуска на витрине модели (releaseChip в
 // её web/app.js); правила — CHIP_RULES в functions/_lib/summarize.js.

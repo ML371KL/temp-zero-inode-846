@@ -55,7 +55,7 @@ export function releaseProblem(data) {
   if (!isObj(data)) return "not an object";
   if (typeof data.schema !== "string") return "no schema";
   if (!isObj(data.meta)) return "no meta";
-  if (!isObj(data.fair_value) && !isObj(data.headline)) return "no valuation";
+  if (!isObj(data.fair_value) && !isObj(data.headline) && !isObj(isObj(data.header) && data.header.headline)) return "no valuation";
   return null;
 }
 

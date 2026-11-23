@@ -68,6 +68,9 @@ test("карточка: неизвестная модель — 404", async () =
 test("releaseProblem и parseScreens", () => {
   assert.equal(releaseProblem(JSON.parse(fixture("x5.json"))), null);
   assert.equal(releaseProblem({ schema: "a", meta: {} }), "no valuation");
+  assert.equal(releaseProblem(JSON.parse(fixture("yandex.json"))), null);
+  assert.equal(releaseProblem({ schema: "a", meta: {}, header: { schema: "family-header-v1", headline: { median: 1 } } }), null, "оценка только в шапке — выпуск");
+  assert.equal(releaseProblem({ schema: "a", meta: {}, header: {} }), "no valuation");
   assert.equal(releaseProblem([]), "not an object");
   const screens = parseScreens(fixture("sber-index.html"));
   assert.deepEqual(screens.map((s) => s.id), ["overview", "market", "model", "report", "capital", "book"]);
